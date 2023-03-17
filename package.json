@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/ChenPeleg/xlsx/issues"
   },
-  "homepage": "https://github.com/ChenPeleg/xlsx#readme"
+  "homepage": "https://github.com/ChenPeleg/xlsx#readme",
+  "dependencies": {
+    "@types/node": "^18.15.3",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^5.0.2"
+  }
 }
