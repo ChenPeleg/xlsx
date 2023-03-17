@@ -1,6 +1,7 @@
 import { createGzip } from 'node:zlib';
 import { pipeline } from 'node:stream';
 import { createReadStream, createWriteStream } from 'node:fs';
+import { promisify } from 'node:util';
 
 const gzip = createGzip();
 const source = createReadStream('input.txt');
@@ -15,7 +16,6 @@ pipeline(source, gzip, destination, (err) => {
 
 // Or, Promisified
 
-const { promisify } = require('node:util');
 const pipe = promisify(pipeline);
 
 async function do_gzip(input, output) {
