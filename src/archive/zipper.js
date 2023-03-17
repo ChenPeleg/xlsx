@@ -1,6 +1,6 @@
-const { createGzip } = require('node:zlib');
-const { pipeline } = require('node:stream');
-const { createReadStream, createWriteStream } = require('node:fs');
+import { createGzip } from 'node:zlib';
+import { pipeline } from 'node:stream';
+import { createReadStream, createWriteStream } from 'node:fs';
 
 const gzip = createGzip();
 const source = createReadStream('input.txt');
@@ -25,7 +25,9 @@ async function do_gzip(input, output) {
   await pipe(source, gzip, destination);
 }
 
-do_gzip('input.txt', 'input.txt.gz').catch((err) => {
-  console.error('An error occurred:', err);
-  process.exitCode = 1;
-});
+export const runZipper = () => {
+  do_gzip('input.txt', 'input.txt.gz').catch((err) => {
+    console.error('An error occurred:', err);
+    process.exitCode = 1;
+  });
+};
