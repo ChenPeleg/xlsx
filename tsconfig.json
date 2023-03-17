@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "moduleResolution": "NodeNext",
+    "outFile": "./justANameToMakeTSHappy.js",
+    "module": "System",
+    "lib": ["ESNext"]
+  }
+}
