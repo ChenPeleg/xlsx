@@ -1,33 +1,7 @@
-import { createGzip } from 'node:zlib';
-import { pipeline } from 'node:stream';
-import { createReadStream, createWriteStream } from 'node:fs';
-import { promisify } from 'node:util';
+import child_process from 'child_process';
 
-const gzip = createGzip();
-const source = createReadStream('input.txt');
-const destination = createWriteStream('input.txt.gz');
-
-pipeline(source, gzip, destination, (err) => {
-  if (err) {
-    console.error('An error occurred:', err);
-    process.exitCode = 1;
-  }
+child_process.execSync(`zip -r <DESIRED_NAME_OF_ZIP_FILE_HERE> *`, {
+  cwd: '<PATH_TO_FOLDER_YOU_WANT_ZIPPED_HERE>',
 });
 
-// Or, Promisified
-
-const pipe = promisify(pipeline);
-
-async function do_gzip(input, output) {
-  const gzip = createGzip();
-  const source = createReadStream(input);
-  const destination = createWriteStream(output);
-  await pipe(source, gzip, destination);
-}
-
-export const runZipper = () => {
-  do_gzip('input.txt', 'input.txt.gz').catch((err) => {
-    console.error('An error occurred:', err);
-    process.exitCode = 1;
-  });
-};
+export const runZipper = () => {};
