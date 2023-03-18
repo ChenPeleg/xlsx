@@ -4,7 +4,7 @@ import { deleteFiles } from './cmd/deleteFiles.js';
 
 const runApp = async () => {
   await copyFiles('xlsx/base', 'temp');
-  await deleteFiles('temp');
+  // await deleteFiles('temp');
   runZipper();
 };
 runApp();
