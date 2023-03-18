@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 
-export const execPromise = async (command) => {
+export const execPromise = async (command, extraParams) => {
   return new Promise(function (resolve, reject) {
     exec(command, (error, stdout, stderr) => {
       if (error) {
