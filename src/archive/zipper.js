@@ -1,7 +1,8 @@
-import child_process from 'child_process';
+import { execPromise } from './execPromise.js';
 
-child_process.execSync(`zip -r <DESIRED_NAME_OF_ZIP_FILE_HERE> *`, {
-  cwd: '<PATH_TO_FOLDER_YOU_WANT_ZIPPED_HERE>',
-});
-
-export const runZipper = () => {};
+export const runZipper = async () => {
+  const command1 = `tar -rf 'myfiles.tar' temp`;
+  const command = `tar -cf archive.zip *`;
+  const res = await execPromise(command);
+  console.log(res);
+};
