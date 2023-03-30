@@ -1,6 +1,29 @@
+import { Cell } from '../class/cell.js';
+import { Row } from '../class/row.js';
 import { Worksheet } from '../class/worksheet.js';
 
-const buildCell = (row, index, cell) => {};
+/**
+ * @param {string} cellIndex
+ * @param {Cell} cell
+ * @returns
+ */
+const buildCell = (cellIndex, cell) => {
+  if (cell.dataType === 'string') {
+    return `<c r="${cellIndex}" t="inlineStr">  
+    <is><t>${cell.value}</t></is>  
+  </c>`;
+  }
+  return `<c r="${cellIndex}">  
+   <v>${cell.value}</v>  
+</c>`;
+};
+
+/**
+ * @param {number} index
+ * @param {Row} row
+ * @returns
+ */
+const buildRow = (index, row) => {};
 
 /**
  * @param {Worksheet} worksheet

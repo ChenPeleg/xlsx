@@ -1,4 +1,5 @@
 export class Cell {
+  /** @type {'number' | 'string' | 'empty'} */
   dataType = 'number';
   constructor(value, options) {
     this.value = value;
