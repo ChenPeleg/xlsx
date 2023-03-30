@@ -1,1 +1,1 @@
-export const addData = async () => {};
+export const addData = async (data, config) => {};
