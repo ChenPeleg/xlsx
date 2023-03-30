@@ -3,11 +3,13 @@ import { copyFiles } from './cmd/copyFiles.js';
 import { deleteFiles } from './cmd/deleteFiles.js';
 import { addData } from './data/addData.js';
 
-const runApp = async () => {
-  await copyFiles('xlsx/base', 'temp');
-  await addData();
+/** @param {{ tempDir: string }} config */
+
+const runApp = async (data, config) => {
+  await copyFiles('xlsx/base', config.tempDir);
+  await addData(data, config);
   await deleteFiles('out');
   await runZipper();
 };
-runApp();
+runApp(null, { tempDir: 'temp' });
 console.log('success!');
