@@ -1,5 +1,7 @@
 import { Worksheet } from '../class/worksheet.js';
 
+const buildCell = (row, index, cell) => {};
+
 /**
  * @param {Worksheet} worksheet
  * @returns
