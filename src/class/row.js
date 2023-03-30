@@ -1,3 +1,8 @@
 export class Row {
-  constructor() {}
+  cells = [];
+  constructor(cells) {
+    if (cells) {
+      this.cells = cells;
+    }
+  }
 }
