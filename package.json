@@ -5,9 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./src/index.js",  
+    "start": "node ./src/index.js",
     "test": "node ./test/test_runner.js integration",
-    "watch" : "tsc"
+    "watch": "tsc",
+    "format": "prettier --write .",
+    "lint": "eslint --fix ."
   },
   "repository": {
     "type": "git",
