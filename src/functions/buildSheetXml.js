@@ -27,7 +27,7 @@ const buildCell = (cellIndex, cell) => {
 const buildRow = (rowIndex, row) => {
   let rowText = `<row r="${rowIndex + 1}" spans="2:12">`;
   row.cells.forEach((c, i) => {
-    rowText += buildCell(`${columnIndexToLetter(rowIndex + 1)}${i + 1}`, c);
+    rowText += buildCell(`${columnIndexToLetter(i + 1)}${rowIndex + 1}`, c);
   });
   rowText += `</row>`;
   return rowText;
