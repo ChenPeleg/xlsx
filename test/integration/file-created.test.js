@@ -2,6 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readdir } from "fs";
 import { resolve } from "node:path";
+import { runApp } from "../../src/core/main.js";
 /**
  * @param {string} fullPath
  * @returns {string[] | any}
@@ -17,9 +18,9 @@ const getFolderFiles = (fullPath) => {
 
 describe("an excel file was created", () => {
   it("created an excel file", async () => {
-    // await runApp(null, { tempDir: 'temp' });
-    const files = ["fasdf"]; // await getFolderFiles(resolve("out"));
+    await runApp(null, { tempDir: "temp" });
+    const files = await getFolderFiles(resolve("out"));
     assert.equal(files.length, 1);
-    // assert.equal(files[0].includes(".xlsx"), true);
+    assert.equal(files[0].includes(".xlsx"), true);
   });
 });
