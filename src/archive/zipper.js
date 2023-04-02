@@ -5,9 +5,8 @@ import { execPromise } from "../utils/execPromise.js";
 /** @param {string} fileName */
 export const runZipper = async (fileName = "workbook") => {
   const psCommand = `Compress-Archive -Path * -DestinationPath ${resolve(
-    "../",
     "out"
-  )}${fileName}.zip`;
+  )}/${fileName}.zip`;
   const res = await execPromise(psCommand, {
     cwd: "temp",
     shell: "powershell.exe",
