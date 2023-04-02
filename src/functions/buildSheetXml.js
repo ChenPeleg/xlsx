@@ -1,7 +1,5 @@
-import { Cell } from '../class/cell.js';
-import { Row } from '../class/row.js';
-import { Worksheet } from '../class/worksheet.js';
-import { columnIndexToLetter } from './xlsxUtils.js';
+import { Cell, Row, Workbook, Worksheet } from "../types/worksheet.js";
+import { columnIndexToLetter } from "./xlsxUtils.js";
 
 /**
  * @param {string} cellIndex
@@ -9,7 +7,7 @@ import { columnIndexToLetter } from './xlsxUtils.js';
  * @returns
  */
 const buildCell = (cellIndex, cell) => {
-  if (cell.dataType === 'string') {
+  if (cell.dataType === "string") {
     return `<c r="${cellIndex}" t="inlineStr">  
     <is><t>${cell.value}</t></is>  
   </c>`;
