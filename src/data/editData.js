@@ -1,8 +1,6 @@
 import { resolve } from "node:path";
-import { Cell } from "../types/cell.js";
-import { Row } from "../class/row.js";
-import { Workbook } from "../class/workbook.js";
-import { Worksheet } from "../class/worksheet.js";
+import { Cell, Row, Workbook, Worksheet } from "../types/worksheet.js";
+
 import { buildSheetXml } from "../functions/buildSheetXml.js";
 import { replaceInFile } from "../utils/replaceInFile.js";
 /**
