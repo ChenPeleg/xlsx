@@ -1,4 +1,7 @@
 import { runApp } from "./core/main.js";
 
-runApp(null, { tempDir: "temp" });
-console.log("success!");
+async function main() {
+  await runApp(null, { tempDir: "temp" });
+  console.log("success!");
+}
+main();
