@@ -1,7 +1,9 @@
+import { CellStyle } from "./style.types.js";
+
 export interface Cell {
     dataType: "number" | "string" | "empty";
     value: number | string;
-    style?: any;
+    style?: CellStyle;
 }
 export interface Row {
   cells: Cell[];
