@@ -11,4 +11,5 @@ export interface CellStyle {
     fontSize?: number ;
     bold?: boolean;
     border?: CellBorder[];
+    styleId?: string;
 } 
