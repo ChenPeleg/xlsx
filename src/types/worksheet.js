@@ -1,4 +1,4 @@
-export class Cell {
+export class CellClass {
   /** @type {"number" | "string" | "empty"} */
   dataType = "number";
   constructor(value, options) {
@@ -11,7 +11,7 @@ export class Cell {
   }
 }
 
-export class Workbook {
+export class WorkbookClass {
   constructor(worksheets, name) {
     this.worksheets = worksheets;
     this.name = name || "worksheet_1";
@@ -19,7 +19,7 @@ export class Workbook {
   worksheets = [];
 }
 
-export class Row {
+export class RowClass {
   cells = [];
   constructor(cells) {
     if (cells) {

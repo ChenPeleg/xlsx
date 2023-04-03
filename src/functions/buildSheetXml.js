@@ -1,9 +1,14 @@
-import { Cell, Row, Workbook, Worksheet } from "../types/worksheet.js";
+import {
+  CellClass,
+  RowClass,
+  WorkbookClass,
+  Worksheet,
+} from "../types/worksheet.js";
 import { columnIndexToLetter } from "./xlsxUtils.js";
 
 /**
  * @param {string} cellIndex
- * @param {Cell} cell
+ * @param {CellClass} cell
  * @returns
  */
 const buildCell = (cellIndex, cell) => {
@@ -19,7 +24,7 @@ const buildCell = (cellIndex, cell) => {
 
 /**
  * @param {number} rowIndex
- * @param {Row} row
+ * @param {RowClass} row
  * @returns
  */
 const buildRow = (rowIndex, row) => {
