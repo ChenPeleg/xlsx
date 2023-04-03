@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync } from 'fs';
-import { resolve } from 'node:path';
+import { readFileSync, writeFileSync } from "fs";
+import { resolve } from "node:path";
 /**
  * @param {string} path
  * @param {string} strToReplace
