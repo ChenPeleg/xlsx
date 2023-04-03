@@ -1,5 +1,10 @@
 import { resolve } from "node:path";
-import { Cell, Row, Workbook, Worksheet } from "../types/worksheet.js";
+import {
+  CellClass,
+  RowClass,
+  WorkbookClass,
+  Worksheet,
+} from "../types/worksheet.js";
 
 import { buildSheetXml } from "../functions/buildSheetXml.js";
 import { replaceInFile } from "../utils/replaceInFile.js";
@@ -8,8 +13,12 @@ import { replaceInFile } from "../utils/replaceInFile.js";
  * @param {import("../types/config.type.js").XlsConfig} config
  */
 export const editData = async (data, config) => {
-  const cells = [new Cell(4234), new Cell("I am a text"), new Cell(12)];
-  const rows = [new Row(cells), new Row(cells), new Row(cells)];
+  const cells = [
+    new CellClass(4234),
+    new CellClass("I am a text"),
+    new CellClass(12),
+  ];
+  const rows = [new RowClass(cells), new RowClass(cells), new RowClass(cells)];
   const worksheet = new Worksheet(rows);
   const sheet1 = buildSheetXml(worksheet);
   replaceInFile(
