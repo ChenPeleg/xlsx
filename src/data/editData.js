@@ -31,7 +31,7 @@ export const editData = async (data, config) => {
   const sheet1 = buildSheetXml(worksheet);
   replaceInFile(
     resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"),
-    "<sheetData></sheetData>",
+    "<sheetData/>",
     sheet1
   );
   console.log(sheet1);
