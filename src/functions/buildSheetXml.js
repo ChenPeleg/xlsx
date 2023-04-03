@@ -1,15 +1,9 @@
-import {
-  CellClass,
-  RowClass,
-  WorkbookClass,
-  Worksheet,
-} from "../types/worksheet.js";
 import { columnIndexToLetter } from "./xlsxUtils.js";
 
 /**
  * @param {string} cellIndex
- * @param {CellClass} cell
- * @returns
+ * @param {import("../types/worksheet.types.js").Cell} cell
+ * @returns {string}
  */
 const buildCell = (cellIndex, cell) => {
   if (cell.dataType === "string") {
@@ -24,8 +18,8 @@ const buildCell = (cellIndex, cell) => {
 
 /**
  * @param {number} rowIndex
- * @param {RowClass} row
- * @returns
+ * @param {import("../types/worksheet.types.js").Row} row
+ * @returns {string}
  */
 const buildRow = (rowIndex, row) => {
   let rowText = `<row r="${rowIndex + 1}" spans="2:12">`;
@@ -37,8 +31,8 @@ const buildRow = (rowIndex, row) => {
 };
 
 /**
- * @param {Worksheet} worksheet
- * @returns
+ * @param {import("../types/worksheet.types.js").Sheet} worksheet
+ * @returns {string}
  */
 export const buildSheetXml = (worksheet) => {
   const rows = worksheet.rows;
