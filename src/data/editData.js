@@ -53,7 +53,7 @@ export const editData = async (data, config) => {
   );
   writeFileSync(
     resolve(config.tempDir, ...xlsContent.workbookFile),
-    xlsContent.buildWorkbookXml(["sheet1", "sheet2"])
+    xlsContent.buildWorkbookXml(["sheet1"])
   );
   // await replaceInFile(
   //   resolve(config.tempDir, ...xlsContent.workbookFile),
