@@ -2,6 +2,7 @@ import { resolve } from "node:path";
 
 import { buildSheetXml } from "../functions/buildSheetXml.js";
 import { replaceInFile } from "../utils/replaceInFile.js";
+import { writeFile, writeFileSync } from "node:fs";
 /**
  * @param {any} value
  * @returns {import("../types/worksheet.types.js").Cell}
@@ -30,6 +31,7 @@ export const editData = async (data, config) => {
   const worksheet = { rows, name: "worksheet1" };
 
   const sheet1 = buildSheetXml(worksheet);
+  const sheet2 = buildSheetXml(worksheet);
   replaceInFile(
     resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"),
     "<sheetData/>",
