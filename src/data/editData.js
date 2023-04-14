@@ -35,12 +35,9 @@ export const editData = async (data, config) => {
 
   const sheet1 = buildSheetXml(worksheet);
   const sheet2 = buildSheetXml(worksheet);
+  const allSheetsNames = ["sheet1"];
   await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
-  writeFileSync(
-    resolve(config.tempDir, ...xlsContent.sheetFile(1)),
-    xlsContent.sheet.replace("<sheetData/>", sheet1),
-    "utf8"
-  );
+
   writeFileSync(
     resolve(config.tempDir, ...xlsContent.sheetFile(1)),
     xlsContent.sheet.replace("<sheetData/>", sheet1),
@@ -53,10 +50,11 @@ export const editData = async (data, config) => {
   );
   writeFileSync(
     resolve(config.tempDir, ...xlsContent.workbookFile),
-    xlsContent.buildWorkbookXml(["sheet1"])
+    xlsContent.buildWorkbookXml(allSheetsNames)
   );
-  // writeFileSync(
-  //   resolve(config.tempDir, ...xlsContent.relationsFileFile),
-  //   xlsContent.buildRelationsXml(["sheet1"])
-  // );
+
+  writeFileSync(
+    resolve(config.tempDir, ...xlsContent.relationsFileFile),
+    xlsContent.buildRelationsXml(allSheetsNames)
+  );
 };
