@@ -51,9 +51,13 @@ export const editData = async (data, config) => {
     xlsContent.sheet.replace("<sheetData/>", sheet2),
     "utf8"
   );
-  await replaceInFile(
+  writeFileSync(
     resolve(config.tempDir, ...xlsContent.workbookFile),
-    /.*/g,
-    ""
+    xlsContent.buildWorkbookXml(["sheet1", "sheet2"])
   );
+  // await replaceInFile(
+  //   resolve(config.tempDir, ...xlsContent.workbookFile),
+  //   /.*/g,
+  //   xlsContent.buildWorkbookXml(["sheet1", "sheet2"])
+  // );
 };
