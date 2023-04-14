@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "node:path";
 /**
  * @param {string} path
- * @param {string} strToReplace
+ * @param {string | RegExp} strToReplace
  * @param {string} newStr
  */
 export const replaceInFile = (path, strToReplace, newStr) => {
