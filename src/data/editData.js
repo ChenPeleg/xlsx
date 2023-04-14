@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { buildSheetXml } from "../functions/buildSheetXml.js";
 import { replaceInFile } from "../utils/replaceInFile.js";
 import { writeFile, writeFileSync } from "node:fs";
+import { deleteFilesFromDir } from "../cmd/deleteFiles.js";
 /**
  * @param {any} value
  * @returns {import("../types/worksheet.types.js").Cell}
@@ -32,9 +33,15 @@ export const editData = async (data, config) => {
 
   const sheet1 = buildSheetXml(worksheet);
   const sheet2 = buildSheetXml(worksheet);
-  replaceInFile(
+  await deleteFilesFromDir(resolve(config.tempDir, "xl", "worksheets"));
+  writeFileSync(
     resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"),
-    "<sheetData/>",
-    sheet1
+    sheet1,
+    "utf8"
   );
+  // replaceInFile(
+  //   resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"),
+  //   "<sheetData/>",
+  //   sheet1
+  // );
 };
