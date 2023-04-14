@@ -34,9 +34,10 @@ export class xlsContent {
    */
   static buildWorkbookXml(sheetNames = ["sheet_1"]) {
     const allSheets = sheetNames
-      .map((name, i) => {
-        `<sheet state="visible" name="${name}" sheetId="${i}" r:id="rId4" />`;
-      })
+      .map(
+        (name, i) =>
+          `<sheet state="visible" name="${name}" sheetId="${i}" r:id="rId4" />`
+      )
       .join("\n");
     return xlsContent.workbookXml.replace(
       '<sheet state="visible" name="sheet_1" sheetId="1" r:id="rId4" />',
