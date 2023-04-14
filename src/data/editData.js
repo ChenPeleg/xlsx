@@ -4,6 +4,8 @@ import { buildSheetXml } from "../functions/buildSheetXml.js";
 import { replaceInFile } from "../utils/replaceInFile.js";
 import { writeFile, writeFileSync } from "node:fs";
 import { deleteFilesFromDir } from "../cmd/deleteFiles.js";
+import { xlsContent } from "./xlsxBuilder.js";
+import { unlink } from "node:fs/promises";
 /**
  * @param {any} value
  * @returns {import("../types/worksheet.types.js").Cell}
@@ -33,15 +35,25 @@ export const editData = async (data, config) => {
 
   const sheet1 = buildSheetXml(worksheet);
   const sheet2 = buildSheetXml(worksheet);
-  await deleteFilesFromDir(resolve(config.tempDir, "xl", "worksheets"));
+  await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
   writeFileSync(
-    resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"),
-    sheet1,
+    resolve(config.tempDir, ...xlsContent.sheetFile(1)),
+    xlsContent.sheet.replace("<sheetData/>", sheet1),
     "utf8"
   );
-  // replaceInFile(
-  //   resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"),
-  //   "<sheetData/>",
-  //   sheet1
-  // );
+  writeFileSync(
+    resolve(config.tempDir, ...xlsContent.sheetFile(1)),
+    xlsContent.sheet.replace("<sheetData/>", sheet1),
+    "utf8"
+  );
+  writeFileSync(
+    resolve(config.tempDir, ...xlsContent.sheetFile(2)),
+    xlsContent.sheet.replace("<sheetData/>", sheet2),
+    "utf8"
+  );
+  await replaceInFile(
+    resolve(config.tempDir, ...xlsContent.workbookFile),
+    /.*/g,
+    ""
+  );
 };
