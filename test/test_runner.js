@@ -87,7 +87,6 @@ const reformatMainData = (text, passed) => {
  * @returns String
  */
 const printTestResult = (resultsAsText, passed = true) => {
-  console.log("typeof resultsAsText", typeof resultsAsText);
   try {
     const conclusionsObj = getConclusions(resultsAsText);
     const textWithoutConclusions = resultsAsText.replace(
@@ -123,9 +122,9 @@ const getTapDataAsync = (testFiles) => {
     const stream = run({
       files: testFiles,
     });
-    stream.on("data", (data) => (allData += data.toString()));
+    stream.on("data", (data) => (allData += data));
     stream.on("test:fail", (data) => (pass = false));
-    stream.on("close", (data) => resolve({ data: allData, pass }));
+    stream.on("close", (data) => resolve({ data: allData.toString(), pass }));
     stream.on("error", (err) => reject(err));
   });
 };
