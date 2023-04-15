@@ -115,7 +115,7 @@ const getTestFiles = (fullPath) => {
  * @returns {Promise<{ data: string; pass: boolean }>}
  */
 const getTapDataAsync = (testFiles) => {
-  let allData = "";
+  let allData;
 
   let pass = true;
   return new Promise((resolve, reject) => {
@@ -137,6 +137,7 @@ const testRunner = async (testType = "integration") => {
       .map((p) => path.resolve(testFilesPath, p));
 
     const result = await getTapDataAsync(testFiles);
+    console.log("getTapDataAsync", result);
     if (result) {
       printTestResult(result.data, result.pass);
       if (result.pass) {
