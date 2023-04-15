@@ -140,7 +140,7 @@ const testRunner = async (testType = "integration") => {
     const testFiles = allFiles
       .filter((f) => f.includes("test.js"))
       .map((p) => path.resolve(testFilesPath, p));
-
+    console.log(testFiles);
     const result = await getTapDataAsync(testFiles);
     if (result) {
       printTestResult(result.data, result.pass);
