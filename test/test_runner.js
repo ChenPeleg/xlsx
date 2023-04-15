@@ -87,6 +87,7 @@ const reformatMainData = (text, passed) => {
  * @returns String
  */
 const printTestResult = (resultsAsText, passed = true) => {
+  console.log(resultsAsText);
   try {
     const conclusionsObj = getConclusions(resultsAsText);
     const textWithoutConclusions = resultsAsText.replace(
