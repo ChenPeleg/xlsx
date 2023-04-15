@@ -1,6 +1,8 @@
 import { run } from "node:test";
 import path from "path";
 import { readdir } from "fs";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 function getConclusions(resultsAsText) {
   const resultArr = resultsAsText.split("\n");
@@ -131,8 +133,8 @@ const getTapDataAsync = (testFiles) => {
 
 const testRunner = async (testType = "integration") => {
   const testFilesPath = `./test/${testType}`;
-
-  console.log("test files path", path.resolve(testFilesPath));
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  console.log("test files path", path.resolve(__dirname, testFilesPath));
 
   try {
     const testFiles = (await getTestFiles(path.resolve(testFilesPath)))
@@ -240,7 +242,7 @@ function writeFinalResults(conclusions) {
   }
   logToConsole(
     paint(
-      `no  ${pass} Tests ${paint(" PASSED ", {
+      `${pass} Tests ${paint(" PASSED ", {
         color: "white",
         background: "BGgreen",
       })}`,
