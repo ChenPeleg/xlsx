@@ -7,6 +7,8 @@ import { deleteFilesFromDir } from "../cmd/deleteFiles.js";
 import { xlsContent } from "./xlsxBuilder.js";
 import { unlink } from "node:fs/promises";
 /**
+ * A basic class to describe a worksheet cell
+ *
  * @param {any} value
  * @returns {import("../types/worksheet.types.js").Cell}
  */
