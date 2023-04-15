@@ -142,6 +142,7 @@ const testRunner = async (testType = "integration") => {
       .map((p) => path.resolve(testFilesPath, p));
     console.log(testFiles);
     const result = await getTapDataAsync(testFiles);
+    console.log("getTapDataAsync", result);
     if (result) {
       printTestResult(result.data, result.pass);
       if (result.pass) {
