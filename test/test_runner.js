@@ -122,7 +122,7 @@ const getTapDataAsync = (testFiles) => {
     const stream = run({
       files: testFiles,
     });
-    stream.on("data", (data) => (allData += data));
+    stream.on("data", (data) => (allData = allData ? (allData += data) : data));
     stream.on("test:fail", (data) => (pass = false));
     stream.on("close", (data) => resolve({ data: allData, pass }));
     stream.on("error", (err) => reject(err));
@@ -137,7 +137,7 @@ const testRunner = async (testType = "integration") => {
       .map((p) => path.resolve(testFilesPath, p));
 
     const result = await getTapDataAsync(testFiles);
-    console.log("getTapDataAsync", result);
+    console.log("getTapDataAsync", result.data);
     if (result) {
       printTestResult(result.data, result.pass);
       if (result.pass) {
