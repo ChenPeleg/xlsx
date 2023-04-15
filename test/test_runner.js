@@ -130,19 +130,13 @@ const getTapDataAsync = (testFiles) => {
 };
 
 const testRunner = async (testType = "integration") => {
-  const testFilesPath = `test/${testType}`;
-
-  console.log("test files path", path.resolve(testFilesPath));
-
+  const testFilesPath = `./test/${testType}`;
   try {
-    const allFiles = await getTestFiles(path.resolve(testFilesPath));
-    console.log(allFiles);
-    const testFiles = allFiles
+    const testFiles = (await getTestFiles(path.resolve(testFilesPath)))
       .filter((f) => f.includes("test.js"))
       .map((p) => path.resolve(testFilesPath, p));
-    console.log(testFiles);
+
     const result = await getTapDataAsync(testFiles);
-    console.log("getTapDataAsync", result);
     if (result) {
       printTestResult(result.data, result.pass);
       if (result.pass) {
@@ -243,7 +237,7 @@ function writeFinalResults(conclusions) {
   }
   logToConsole(
     paint(
-      `no  ${pass} Tests ${paint(" PASSED ", {
+      `${pass} Tests ${paint(" PASSED ", {
         color: "white",
         background: "BGgreen",
       })}`,
