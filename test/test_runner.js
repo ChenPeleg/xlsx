@@ -124,7 +124,7 @@ const getTapDataAsync = (testFiles) => {
     });
     stream.on("data", (data) => (allData += data));
     stream.on("test:fail", (data) => (pass = false));
-    stream.on("close", (data) => resolve({ data: allData.toString(), pass }));
+    stream.on("close", (data) => resolve({ data: allData, pass }));
     stream.on("error", (err) => reject(err));
   });
 };
