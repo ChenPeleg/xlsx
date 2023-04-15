@@ -135,7 +135,9 @@ const testRunner = async (testType = "integration") => {
   console.log("test files path", path.resolve(testFilesPath));
 
   try {
-    const testFiles = (await getTestFiles(path.resolve(testFilesPath)))
+    const allFiles = await getTestFiles(path.resolve(testFilesPath));
+    console.log(allFiles);
+    const testFiles = allFiles
       .filter((f) => f.includes("test.js"))
       .map((p) => path.resolve(testFilesPath, p));
 

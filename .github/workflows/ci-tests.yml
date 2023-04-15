@@ -24,5 +24,8 @@ jobs:
         run: npm run lint
       - name: Run test suite
         run: npm test
+      # delete after tests:
       - name: Check files
         run: ls
+      - name: Get Path
+        run: pwd
