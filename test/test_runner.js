@@ -237,7 +237,7 @@ function writeFinalResults(conclusions) {
   }
   logToConsole(
     paint(
-      `  ${pass} Tests ${paint(" PASSED ", {
+      `no  ${pass} Tests ${paint(" PASSED ", {
         color: "white",
         background: "BGgreen",
       })}`,
