@@ -130,7 +130,8 @@ const getTapDataAsync = (testFiles) => {
 };
 
 const testRunner = async (testType = "integration") => {
-  const testFilesPath = `./test/${testType}`;
+  const testFilesPath = `test/${testType}`;
+
   console.log("test files path", path.resolve(testFilesPath));
   try {
     const testFiles = (await getTestFiles(path.resolve(testFilesPath)))
