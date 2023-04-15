@@ -87,13 +87,15 @@ const reformatMainData = (text, passed) => {
  * @returns String
  */
 const printTestResult = (resultsAsText, passed = true) => {
-  console.log(resultsAsText);
+  console.log("resultsAsText", resultsAsText);
   try {
     const conclusionsObj = getConclusions(resultsAsText);
+    console.log("conclusionsObj", conclusionsObj);
     const textWithoutConclusions = resultsAsText.replace(
       conclusionsObj.conclusionsText,
       ""
     );
+    console.log("textWithoutConclusions", textWithoutConclusions);
     const mainData = reformatMainData(textWithoutConclusions, passed);
     logToConsole(mainData);
     writeFinalResults(conclusionsObj.conclusions);
