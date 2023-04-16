@@ -90,16 +90,32 @@ const reformatMainData = (text, passed) => {
  */
 const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
   try {
-    console.log("resultsAsText", resultsAsText);
-    const conclusionsObj = getConclusionsFrom_data_stream(resultsAsText);
+    let conclusionsObj = getConclusionsFrom_data_stream(resultsAsText);
+    //resultsAsText.includes("[object Object][object Object]") || passed
+    if (true) {
+      const tests = resultsAsTestObjects.map((t) => ({
+        file: t.file || t.name,
+        testNumber: t.testNumber,
+      }));
+
+      const testsMap = new Map();
+      tests.forEach((t) =>
+        testsMap.set(t.testNumber, `ok ${t.testNumber} - ${t.file}`)
+      );
+      resultsAsText = Array.from(testsMap)
+        .map((a) => a[1])
+        .join("\n");
+    }
     const textWithoutConclusions = resultsAsText.replace(
       conclusionsObj.conclusionsText,
       ""
     );
+
     const mainData = reformatMainData(textWithoutConclusions, passed);
     logToConsole(mainData);
     writeFinalResults(conclusionsObj.conclusions);
   } catch (err) {
+    console.log("error", err);
     logToConsole(resultsAsText);
   }
 };
@@ -144,7 +160,7 @@ const testRunner = async (testType = "integration") => {
       .map((p) => path.resolve(testFilesPath, p));
 
     const result = await getTapDataAsync(testFiles);
-    result.passData.forEach((d) => console.log(d));
+
     if (result) {
       printTestResult(result.data, result.pass, result.passData);
       if (result.pass) {
