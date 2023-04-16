@@ -99,12 +99,10 @@ const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
       }));
 
       const testsSet = new Set(
-        tests.map((t) => `ok ${t.testNumber} - ${t.file}`)
+        tests.map((t) => `ok ${t.testNumber} - ${t.file}\n`)
       );
 
-      resultsAsText = Array.from(testsSet)
-        .map((a) => a[1])
-        .join("\n");
+      resultsAsText = Array.from(testsSet).join("\n");
       conclusionsObj.conclusions.pass = testsSet.size.toString();
     }
     const textWithoutConclusions = resultsAsText.replace(
