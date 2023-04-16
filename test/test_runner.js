@@ -91,15 +91,15 @@ const reformatMainData = (text, passed) => {
 const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
   try {
     let conclusionsObj = getConclusionsFrom_data_stream(resultsAsText);
-    //resultsAsText.includes("[object Object][object Object]") || passed
-    if (passed) {
+
+    if (resultsAsText.includes("[object Object][object Object]") && passed) {
       const tests = resultsAsTestObjects.map((t) => ({
         file: t.file || t.name,
         testNumber: t.testNumber,
       }));
 
-      const testsSet = Array.from(new Set(tests.map((t) => t.testNumber)))
-        .map((n) => tests.find((t) => t.testNumber === n))
+      const testsSet = Array.from(new Set(tests.map((t) => +t.testNumber)))
+        .map((n) => tests.findLast((t) => +t.testNumber === n))
         .map((t) => `ok ${t.testNumber} - ${t.file}`);
 
       resultsAsText = testsSet.join("\n") + "\n";
