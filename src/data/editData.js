@@ -31,7 +31,11 @@ const CellClass = (value, options) => {
  * @param {import("../types/config.type.js").XlsConfig} config
  */
 export const editData = async (data, config) => {
-  const cells = [CellClass(4234), CellClass("I am a text"), CellClass(12)];
+  const cell1 = CellClass(4234);
+  const cell2 = CellClass("I am a text");
+  cell1.style.background = "red";
+  cell2.style.background = "blue";
+  const cells = [cell1, cell2, CellClass(12)];
   const rows = [{ cells }, { cells }, { cells }];
   const worksheet = { rows, name: "worksheet1" };
 
