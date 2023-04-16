@@ -23,6 +23,7 @@ const CellClass = (value, options) => {
   return {
     dataType,
     value,
+    style: {},
   };
 };
 
@@ -41,7 +42,7 @@ export const editData = async (data, config) => {
 
   const sheet1 = buildSheetXml(worksheet);
   const sheet2 = buildSheetXml(worksheet);
-  const allSheetsNames = ["sheet1", "sheet2"];
+  const allSheetsNames = ["sheet1", "my nice sheet"];
   await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
 
   writeFileSync(
