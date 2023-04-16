@@ -98,12 +98,12 @@ const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
         testNumber: t.testNumber,
       }));
 
-      const testsSet = new Set(
-        tests.map((t) => `ok ${t.testNumber} - ${t.file}\n`)
-      );
+      const testsSet = Array.from(new Set(tests.map((t) => t.testNumber)))
+        .map((n) => tests.find((t) => t.testNumber === n))
+        .map((t) => `ok ${t.testNumber} - ${t.file}`);
 
-      resultsAsText = Array.from(testsSet).join("\n");
-      conclusionsObj.conclusions.pass = testsSet.size.toString();
+      resultsAsText = testsSet.join("\n") + "\n";
+      conclusionsObj.conclusions.pass = testsSet.length.toString();
     }
     const textWithoutConclusions = resultsAsText.replace(
       conclusionsObj.conclusionsText,
