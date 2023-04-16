@@ -43,3 +43,22 @@ Fills example:
 </fill>
 
 ```
+
+## the confusing part:
+Every cell will have a reference to one <xf> in the <cellXfs> collection. This is direct formatting for the cell. To apply a style to the cell, the <xf> references the style using the xfId attribute. The xfId attribute is an index into the <cellStyleXFs> collection, which collects the cell styles available to the user. The <cellStyleXFs> contains one <xf> for each style. Each such <xf> is tied to its name via an index (in its xfId attribute) from the <cellStyles> collection.
+
+example :
+```xml
+    <cellStyleXfs count="1">
+        <xf numFmtId="0" fontId="0" fillId="0" borderId="0" />
+    </cellStyleXfs>
+    <cellXfs count="5">
+        <xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" />
+        <xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1" />
+        <xf numFmtId="0" fontId="0" fillId="2" borderId="0" xfId="0" applyFill="1" />
+        <xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1">
+            <alignment horizontal="center" />
+        </xf>
+        <xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1" />
+    </cellXfs>
+```
