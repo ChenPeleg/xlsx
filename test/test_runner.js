@@ -98,8 +98,8 @@ const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
         testNumber: t.testNumber,
       }));
 
-      const testsSet = Array.from(new Set(tests.map((t) => +t.testNumber)))
-        .map((n) => tests.findLast((t) => +t.testNumber === n))
+      const testsSet = Array.from(new Set(tests.map((t) => t.file)))
+        .map((f) => tests.findLast((t) => t.file === f))
         .map((t) => `ok ${t.testNumber} - ${t.file}`);
 
       resultsAsText = testsSet.join("\n") + "\n";
