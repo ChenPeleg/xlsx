@@ -2,7 +2,7 @@ import { run } from "node:test";
 import path from "path";
 import { readdir } from "fs";
 
-function getConclusions(resultsAsText) {
+function getConclusionsFrom_data_stream(resultsAsText) {
   const resultArr = resultsAsText.split("\n");
   const resultRows = resultArr.slice(-9);
 
@@ -84,11 +84,14 @@ const reformatMainData = (text, passed) => {
 
 /**
  * @param {string} resultsAsText
+ * @param {boolean} passed
+ * @param {any[]} resultsAsTestObjects
  * @returns String
  */
-const printTestResult = (resultsAsText, passed = true) => {
+const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
   try {
-    const conclusionsObj = getConclusions(resultsAsText);
+    console.log("resultsAsText", resultsAsText);
+    const conclusionsObj = getConclusionsFrom_data_stream(resultsAsText);
     const textWithoutConclusions = resultsAsText.replace(
       conclusionsObj.conclusionsText,
       ""
@@ -112,11 +115,11 @@ const getTestFiles = (fullPath) => {
 
 /**
  * @param testFiles
- * @returns {Promise<{ data: string; pass: boolean; passData: string }>}
+ * @returns {Promise<{ data: string; pass: boolean; passData: any[] }>}
  */
 const getTapDataAsync = (testFiles) => {
   let allData = "";
-  let passData = "";
+  let passData = [];
 
   let pass = true;
   return new Promise((resolve, reject) => {
@@ -126,7 +129,7 @@ const getTapDataAsync = (testFiles) => {
     stream.on("data", (data) => (allData += data.toString()));
     stream.on("test:fail", (data) => (pass = false));
     stream.on("test:pass", (data) => {
-      passData += JSON.stringify(data);
+      passData.push(data);
     });
     stream.on("close", (data) => resolve({ data: allData, pass, passData }));
     stream.on("error", (err) => reject(err));
@@ -141,9 +144,9 @@ const testRunner = async (testType = "integration") => {
       .map((p) => path.resolve(testFilesPath, p));
 
     const result = await getTapDataAsync(testFiles);
-    console.log(result.passData);
+    result.passData.forEach((d) => console.log(d));
     if (result) {
-      printTestResult(result.data, result.pass);
+      printTestResult(result.data, result.pass, result.passData);
       if (result.pass) {
         return true;
       }
