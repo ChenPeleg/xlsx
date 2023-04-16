@@ -47,6 +47,8 @@ const reformatMainData = (text, passed) => {
   const formatUrl = removedRedundant.map((l) => {
     l = l.replace(currentPath, "");
     l = l.replace(/\\/g, " ");
+    l = l.replace(/\//g, " ");
+    l = l.replace(/(\s+)/g, " ");
     l = l.replace("not ok ", paint("failed X ", "red"));
     l = l.replace("ok ", paint("passed ✔ ", "green"));
     return l;
