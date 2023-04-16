@@ -112,10 +112,11 @@ const getTestFiles = (fullPath) => {
 
 /**
  * @param testFiles
- * @returns {Promise<{ data: string; pass: boolean }>}
+ * @returns {Promise<{ data: string; pass: boolean; passData: string }>}
  */
 const getTapDataAsync = (testFiles) => {
   let allData = "";
+  let passData = "";
 
   let pass = true;
   return new Promise((resolve, reject) => {
@@ -125,10 +126,9 @@ const getTapDataAsync = (testFiles) => {
     stream.on("data", (data) => (allData += data.toString()));
     stream.on("test:fail", (data) => (pass = false));
     stream.on("test:pass", (data) => {
-      console.log(data);
-      pass = false;
+      passData += JSON.stringify(data);
     });
-    stream.on("close", (data) => resolve({ data: allData, pass }));
+    stream.on("close", (data) => resolve({ data: allData, pass, passData }));
     stream.on("error", (err) => reject(err));
   });
 };
@@ -141,6 +141,7 @@ const testRunner = async (testType = "integration") => {
       .map((p) => path.resolve(testFilesPath, p));
 
     const result = await getTapDataAsync(testFiles);
+    console.log(result.passData);
     if (result) {
       printTestResult(result.data, result.pass);
       if (result.pass) {
