@@ -92,7 +92,7 @@ const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
   try {
     let conclusionsObj = getConclusionsFrom_data_stream(resultsAsText);
     //resultsAsText.includes("[object Object][object Object]") || passed
-    if (true) {
+    if (passed) {
       const tests = resultsAsTestObjects.map((t) => ({
         file: t.file || t.name,
         testNumber: t.testNumber,
@@ -105,6 +105,7 @@ const printTestResult = (resultsAsText, passed, resultsAsTestObjects) => {
       resultsAsText = Array.from(testsMap)
         .map((a) => a[1])
         .join("\n");
+      conclusionsObj.conclusions.pass = testsMap.size.toString();
     }
     const textWithoutConclusions = resultsAsText.replace(
       conclusionsObj.conclusionsText,
