@@ -64,14 +64,7 @@ export const editData = async (data, config) => {
     xlsContent.buildRelationsXml(allSheetsNames)
   );
 };
-/**
- * @param {{
- *   rows: {
- *     cells: import("../types/worksheet.types.js").Cell[];
- *   }[];
- *   name: string;
- * }[]} sheets
- */
+/** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
 const createFileObjectFromSheets = (...sheets) => {
   const xmlFilesObject = {
     ...xlsxFiles,
@@ -79,6 +72,23 @@ const createFileObjectFromSheets = (...sheets) => {
     workbookRels: { ...xlsxFiles.workbookXml },
   };
   const sheetNames = sheets.map((s) => s.name);
-
-  sheets.forEach((sheet) => {});
+  xmlFilesObject.workbookXml.content = xlsContent.buildWorkbookXml(sheetNames);
+  xmlFilesObject.workbookRels.content =
+    xlsContent.buildRelationsXml(sheetNames);
+  const genericSheet = {
+    ...xmlFilesObject.sheet1,
+    url: [...xmlFilesObject.sheet1.url],
+  };
+  sheets.forEach((sheet, index) => {
+    const sheetIndex = `sheet${index + 1}`;
+    const sheetAsString = buildSheetXml(sheet);
+    xmlFilesObject[sheetIndex].url = [
+      ...genericSheet.url.slice(0, -1),
+      `sheet${sheetIndex}.xml`,
+    ];
+    xmlFilesObject[sheetIndex].sheet = genericSheet.content.replace(
+      "<sheetData/>",
+      sheetAsString
+    );
+  });
 };
