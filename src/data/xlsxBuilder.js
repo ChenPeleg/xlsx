@@ -75,8 +75,12 @@ export class xlsContent {
       allSheets
     );
   }
-  static copyFilesToTempDir(tempDir) {
-    for (const file in xlsxFiles) {
+  /**
+   * @param {Record<string, { url: string[]; content: string }>} fileObject
+   * @param {any} tempDir
+   */
+  static copyFilesToTempDir(fileObject, tempDir) {
+    for (const file in fileObject) {
       const dir = resolve(tempDir, ...xlsxFiles[file].url.slice(0, -1));
       if (!existsSync(dir)) {
         mkdirSync(dir, { recursive: true });
@@ -84,7 +88,7 @@ export class xlsContent {
       writeFileSync(
         resolve(tempDir, ...xlsxFiles[file].url),
         xlsxFiles[file].content,
-        { flag: "w" }
+        { flag: "w", encoding: "utf8" }
       );
     }
   }
