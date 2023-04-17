@@ -1,9 +1,7 @@
 import { resolve } from "node:path";
 
 import { buildSheetXml } from "../functions/buildSheetXml.js";
-import { replaceInFile } from "../utils/replaceInFile.js";
-import { writeFile, writeFileSync } from "node:fs";
-import { deleteFilesFromDir } from "../cmd/deleteFiles.js";
+import { writeFileSync } from "node:fs";
 import { xlsContent } from "./xlsxBuilder.js";
 import { unlink } from "node:fs/promises";
 import { xlsxFiles } from "./xlsxFiles.js";
@@ -65,4 +63,22 @@ export const editData = async (data, config) => {
     resolve(config.tempDir, ...xlsxFiles.workbookRels.url),
     xlsContent.buildRelationsXml(allSheetsNames)
   );
+};
+/**
+ * @param {{
+ *   rows: {
+ *     cells: import("../types/worksheet.types.js").Cell[];
+ *   }[];
+ *   name: string;
+ * }[]} sheets
+ */
+const createFileObjectFromSheets = (...sheets) => {
+  const xmlFilesObject = {
+    ...xlsxFiles,
+    workbookXml: { ...xlsxFiles.workbookXml },
+    workbookRels: { ...xlsxFiles.workbookXml },
+  };
+  const sheetNames = sheets.map((s) => s.name);
+
+  sheets.forEach((sheet) => {});
 };
