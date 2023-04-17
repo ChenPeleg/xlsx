@@ -11,6 +11,7 @@ export const runApp = async (data, config) => {
   const tempDir = config?.tempDir || "temp";
 
   await deleteFilesFromDir(resolve(tempDir));
+
   await xlsContent.copyFilesToTempDir(resolve(tempDir));
   // await copyFiles(resolve("xlsx", "base"), tempDir);
   await editData(data, config);
