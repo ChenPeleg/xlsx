@@ -1,3 +1,4 @@
+/** @type {Record<string, { url: string[]; content: string }>} */
 export const xlsxFiles = {
   rels: {
     url: ["_rels", ".rels"],
