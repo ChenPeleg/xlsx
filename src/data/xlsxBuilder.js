@@ -1,4 +1,6 @@
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { xlsxFiles } from "./xlsxFiles.js";
+import { resolve } from "node:path";
 
 export class xlsContent {
   /**
@@ -80,10 +82,17 @@ export class xlsContent {
       allSheets
     );
   }
-  static copyFilesToTempDir(dir) {
-    const allFiles = xlsxFiles;
-    for (const fileObj in allFiles) {
-      console.log(fileObj);
+  static copyFilesToTempDir(tempDir) {
+    for (const file in xlsxFiles) {
+      const dir = resolve(tempDir, ...xlsxFiles[file].url.slice(0, -1));
+      if (!existsSync(dir)) {
+        mkdirSync(dir, { recursive: true });
+      }
+      writeFileSync(
+        resolve(tempDir, ...xlsxFiles[file].url),
+        xlsxFiles[file].content,
+        { flag: "w" }
+      );
     }
   }
 }
