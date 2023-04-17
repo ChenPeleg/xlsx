@@ -40,7 +40,7 @@ export class xlsContent {
           }.xml"/>`
       )
       .join("\n");
-    return xlsxFiles.rels.replace(
+    return xlsxFiles.rels.content.replace(
       '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>',
       allSheets
     );
