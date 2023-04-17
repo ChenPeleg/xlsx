@@ -1,3 +1,5 @@
+import { xlsxFiles } from "./xlsxFiles.js";
+
 export class xlsContent {
   /**
    * @param {number} sheetIndex
@@ -77,5 +79,11 @@ export class xlsContent {
       '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>',
       allSheets
     );
+  }
+  static copyFilesToTempDir(dir) {
+    const allFiles = xlsxFiles;
+    for (const fileObj in allFiles) {
+      console.log(fileObj);
+    }
   }
 }
