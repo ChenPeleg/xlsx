@@ -43,7 +43,7 @@ export class xlsContent {
           }.xml"/>`
       )
       .join("\n");
-    return xlsContent.rels.replace(
+    return xlsxFiles.workbookRels.content.replace(
       '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>',
       allSheets
     );
