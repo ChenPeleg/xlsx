@@ -6,6 +6,7 @@ import { writeFile, writeFileSync } from "node:fs";
 import { deleteFilesFromDir } from "../cmd/deleteFiles.js";
 import { xlsContent } from "./xlsxBuilder.js";
 import { unlink } from "node:fs/promises";
+import { xlsxFiles } from "./xlsxFiles.js";
 /**
  * A basic class to describe a worksheet cell
  *
@@ -47,21 +48,21 @@ export const editData = async (data, config) => {
 
   writeFileSync(
     resolve(config.tempDir, ...xlsContent.sheetFile(1)),
-    xlsContent.sheet.replace("<sheetData/>", sheet1),
+    xlsxFiles.sheet1.content.replace("<sheetData/>", sheet1),
     "utf8"
   );
   writeFileSync(
     resolve(config.tempDir, ...xlsContent.sheetFile(2)),
-    xlsContent.sheet.replace("<sheetData/>", sheet2),
+    xlsxFiles.sheet1.content.replace("<sheetData/>", sheet2),
     "utf8"
   );
   writeFileSync(
-    resolve(config.tempDir, ...xlsContent.workbookFile),
+    resolve(config.tempDir, ...xlsxFiles.workbookXml.url),
     xlsContent.buildWorkbookXml(allSheetsNames)
   );
 
   writeFileSync(
-    resolve(config.tempDir, ...xlsContent.relationsFileFile),
+    resolve(config.tempDir, ...xlsxFiles.workbookRels.url),
     xlsContent.buildRelationsXml(allSheetsNames)
   );
 };
