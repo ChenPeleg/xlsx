@@ -29,6 +29,7 @@ const CellClass = (value, options) => {
 /**
  * @param {any} data
  * @param {import("../types/config.type.js").XlsConfig} config
+ * @returns {Promise<Record<string, { url: string[]; content: string }>>}
  */
 export const editData = async (data, config) => {
   const cell1 = CellClass(4234);
@@ -42,8 +43,10 @@ export const editData = async (data, config) => {
   const sheet1 = buildSheetXml(worksheet);
   const sheet2 = buildSheetXml(worksheet);
   const allSheetsNames = ["sheet1", "my nice sheet"];
-  await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
-
+  // await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
+  const worksheet2 = { ...worksheet };
+  worksheet2.name = "second";
+  // return createFileObjectFromSheets(worksheet, worksheet2);
   writeFileSync(
     resolve(config.tempDir, ...xlsContent.sheetFile(1)),
     xlsxFiles.sheet1.content.replace("<sheetData/>", sheet1),
@@ -63,6 +66,7 @@ export const editData = async (data, config) => {
     resolve(config.tempDir, ...xlsxFiles.workbookRels.url),
     xlsContent.buildRelationsXml(allSheetsNames)
   );
+  return createFileObjectFromSheets(worksheet, worksheet2);
 };
 /** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
 const createFileObjectFromSheets = (...sheets) => {
@@ -82,13 +86,15 @@ const createFileObjectFromSheets = (...sheets) => {
   sheets.forEach((sheet, index) => {
     const sheetIndex = `sheet${index + 1}`;
     const sheetAsString = buildSheetXml(sheet);
+    xmlFilesObject[sheetIndex] = {};
     xmlFilesObject[sheetIndex].url = [
       ...genericSheet.url.slice(0, -1),
       `sheet${sheetIndex}.xml`,
     ];
-    xmlFilesObject[sheetIndex].sheet = genericSheet.content.replace(
+    xmlFilesObject[sheetIndex].content = genericSheet.content.replace(
       "<sheetData/>",
       sheetAsString
     );
   });
+  return xmlFilesObject;
 };
