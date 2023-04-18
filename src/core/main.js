@@ -11,7 +11,6 @@ import { xlsxFiles } from "../data/xlsxFiles.js";
 export const runApp = async (data, config) => {
   const tempDir = config?.tempDir || "temp";
   await deleteFilesFromDir(resolve(tempDir));
-  await xlsContent.copyFilesToTempDir(xlsxFiles, resolve(tempDir));
   const xlsObject = await editData(data, config);
   await xlsContent.copyFilesToTempDir(xlsObject, resolve(tempDir));
 
