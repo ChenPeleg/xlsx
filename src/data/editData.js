@@ -46,26 +46,28 @@ export const editData = async (data, config) => {
   // await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";
-  // return createFileObjectFromSheets(worksheet, worksheet2);
-  writeFileSync(
-    resolve(config.tempDir, ...xlsContent.sheetFile(1)),
-    xlsxFiles.sheet1.content.replace("<sheetData/>", sheet1),
-    "utf8"
-  );
-  writeFileSync(
-    resolve(config.tempDir, ...xlsContent.sheetFile(2)),
-    xlsxFiles.sheet1.content.replace("<sheetData/>", sheet2),
-    "utf8"
-  );
-  writeFileSync(
-    resolve(config.tempDir, ...xlsxFiles.workbookXml.url),
-    xlsContent.buildWorkbookXml(allSheetsNames)
-  );
+  if (true) {
+    // writeFileSync(
+    //   resolve(config.tempDir, ...xlsContent.sheetFile(1)),
+    //   xlsxFiles.sheet1.content.replace("<sheetData/>", sheet1),
+    //   "utf8"
+    // );
+    // writeFileSync(
+    //   resolve(config.tempDir, ...xlsContent.sheetFile(2)),
+    //   xlsxFiles.sheet1.content.replace("<sheetData/>", sheet2),
+    //   "utf8"
+    // );
+    writeFileSync(
+      resolve(config.tempDir, ...xlsxFiles.workbookXml.url),
+      xlsContent.buildWorkbookXml(allSheetsNames)
+    );
 
-  writeFileSync(
-    resolve(config.tempDir, ...xlsxFiles.workbookRels.url),
-    xlsContent.buildRelationsXml(allSheetsNames)
-  );
+    writeFileSync(
+      resolve(config.tempDir, ...xlsxFiles.workbookRels.url),
+      xlsContent.buildRelationsXml(allSheetsNames)
+    );
+  }
+
   return createFileObjectFromSheets(worksheet, worksheet2);
 };
 /** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
@@ -89,8 +91,9 @@ const createFileObjectFromSheets = (...sheets) => {
     xmlFilesObject[sheetIndex] = {};
     xmlFilesObject[sheetIndex].url = [
       ...genericSheet.url.slice(0, -1),
-      `sheet${sheetIndex}.xml`,
+      `${sheetIndex}.xml`,
     ];
+
     xmlFilesObject[sheetIndex].content = genericSheet.content.replace(
       "<sheetData/>",
       sheetAsString
