@@ -5,6 +5,7 @@ import { writeFileSync } from "node:fs";
 import { xlsContent } from "./xlsxBuilder.js";
 import { unlink } from "node:fs/promises";
 import { xlsxFiles } from "./xlsxFiles.js";
+import { buildStyleSheets } from "./BuildStyles.js";
 /**
  * A basic class to describe a worksheet cell
  *
@@ -98,32 +99,4 @@ const createFileObjectFromSheets = (...sheets) => {
     );
   });
   return xmlFilesObject;
-};
-/** @param {import("../types/style.types.js").CellStyle[]} allStyles */
-const buildStyleSheets = (allStyles) => {
-  const allStylesContainers = {
-    background: [],
-    color: [],
-    fontSize: [],
-    bold: [],
-    border: [],
-  };
-  const styleIdModel = {
-    // background: -1,
-    // color: -1,
-    // fontSize: -1,
-    // bold: -1,
-    // border: -1,
-  };
-  const stylesWithIds = allStyles.map((s) => ({ ...styleIdModel }));
-  allStyles.forEach((s, i) => {
-    for (const prop in s) {
-      const trait = s[prop];
-      if (!allStylesContainers[prop].includes(trait)) {
-        allStylesContainers[prop].push(trait);
-      }
-      stylesWithIds[i][prop] = allStylesContainers[prop].indexOf(trait);
-    }
-  });
-  console.log(JSON.stringify(stylesWithIds));
 };
