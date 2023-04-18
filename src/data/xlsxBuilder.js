@@ -51,13 +51,13 @@ export class xlsContent {
    */
   static copyFilesToTempDir(fileObject, tempDir) {
     for (const file in fileObject) {
-      const dir = resolve(tempDir, ...xlsxFiles[file].url.slice(0, -1));
+      const dir = resolve(tempDir, ...fileObject[file].url.slice(0, -1));
       if (!existsSync(dir)) {
         mkdirSync(dir, { recursive: true });
       }
       writeFileSync(
-        resolve(tempDir, ...xlsxFiles[file].url),
-        xlsxFiles[file].content,
+        resolve(tempDir, ...fileObject[file].url),
+        fileObject[file].content,
         { flag: "w", encoding: "utf8" }
       );
     }

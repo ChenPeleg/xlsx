@@ -13,6 +13,8 @@ export const runApp = async (data, config) => {
   await deleteFilesFromDir(resolve(tempDir));
   await xlsContent.copyFilesToTempDir(xlsxFiles, resolve(tempDir));
   const xlsObject = await editData(data, config);
+  await xlsContent.copyFilesToTempDir(xlsObject, resolve(tempDir));
+
   await deleteFilesFromDir("out");
   await runZipper();
 };
