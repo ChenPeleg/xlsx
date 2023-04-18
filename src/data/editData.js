@@ -73,7 +73,7 @@ const createFileObjectFromSheets = (...sheets) => {
       })
     )
   );
-  console.log(allStyles);
+  buildStyleSheets(allStyles.map((s) => JSON.parse(s)));
 
   const sheetNames = sheets.map((s) => s.name);
   xmlFilesObject.workbookXml.content = xlsContent.buildWorkbookXml(sheetNames);
@@ -98,4 +98,31 @@ const createFileObjectFromSheets = (...sheets) => {
     );
   });
   return xmlFilesObject;
+};
+/** @param {import("../types/style.types.js").CellStyle[]} allStyles */
+const buildStyleSheets = (allStyles) => {
+  const allStylesContainers = {
+    background: [],
+    color: [],
+    fontSize: [],
+    bold: [],
+    border: [],
+  };
+  const styleIdModel = {
+    background: -1,
+    color: -1,
+    fontSize: -1,
+    bold: -1,
+    border: -1,
+  };
+  const stylesWithIds = allStyles.map((s) => ({ ...styleIdModel }));
+  allStyles.forEach((s, i) => {
+    for (const prop in s) {
+      const trait = s[prop];
+      if (!allStylesContainers[prop].includes(trait)) {
+        trait;
+      }
+      stylesWithIds[i][prop] = allStylesContainers[prop].indexOf(trait);
+    }
+  });
 };
