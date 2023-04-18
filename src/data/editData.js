@@ -46,12 +46,6 @@ export const editData = async (data, config) => {
   // await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";
-  if (true) {
-    writeFileSync(
-      resolve(config.tempDir, ...xlsxFiles.workbookRels.url),
-      xlsContent.buildRelationsXml(allSheetsNames)
-    );
-  }
 
   return createFileObjectFromSheets(worksheet, worksheet2);
 };
@@ -60,7 +54,7 @@ const createFileObjectFromSheets = (...sheets) => {
   const xmlFilesObject = {
     ...xlsxFiles,
     workbookXml: { ...xlsxFiles.workbookXml },
-    workbookRels: { ...xlsxFiles.workbookXml },
+    workbookRels: { ...xlsxFiles.workbookRels },
   };
   const sheetNames = sheets.map((s) => s.name);
   xmlFilesObject.workbookXml.content = xlsContent.buildWorkbookXml(sheetNames);
