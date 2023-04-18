@@ -47,6 +47,10 @@ export const editData = async (data, config) => {
 };
 /** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
 const createFileObjectFromSheets = (...sheets) => {
+  sheets = sheets.map((s) => ({
+    ...s,
+    rows: s.rows.map((r) => ({ ...r, cells: r.cells.map((c) => ({ ...c })) })),
+  }));
   const xmlFilesObject = {
     ...xlsxFiles,
     workbookXml: { ...xlsxFiles.workbookXml },
@@ -59,15 +63,17 @@ const createFileObjectFromSheets = (...sheets) => {
       r.cells.forEach((c) => {
         const styleProps = Object.keys(c.style);
         if (styleProps.length) {
-          const stringifiedStyle = JSON.stringify(styleProps);
+          const stringifiedStyle = JSON.stringify(c.style);
           if (!allStyles.includes(stringifiedStyle)) {
             allStyles.push(stringifiedStyle);
           }
+          c.style = { ...c.style };
           c.style.styleId = allStyles.indexOf(stringifiedStyle).toString();
         }
       })
     )
   );
+  console.log(allStyles);
 
   const sheetNames = sheets.map((s) => s.name);
   xmlFilesObject.workbookXml.content = xlsContent.buildWorkbookXml(sheetNames);
