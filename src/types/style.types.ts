@@ -8,8 +8,11 @@ type CellBorder = 'top' | 'bottom' | 'right' | 'left' | 'all' | {
 export interface CellStyle {
     background?: string;
     color? : string;  
-    fontSize?: number ;
-    bold?: boolean;
+    font? : {
+      size?: number;
+      bold?: boolean;
+      color? : string;  
+    } 
     border?: CellBorder[];
     styleId?: string;
 } 
