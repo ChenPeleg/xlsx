@@ -28,4 +28,12 @@ export const buildStyleSheets = (allStyles) => {
   const cellStyleXfs = `<cellStyleXfs count="1">
         <xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>
     </cellStyleXfs>`;
+
+  /**
+   * @param {string} argb
+   * @returns
+   */
+  const buildFill = (argb) =>
+    `<fill><patternFill patternType="solid"><fgColor rgb="${argb}"/>
+    <bgColor indexed="64"/></patternFill></fill>`;
 };
