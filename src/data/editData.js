@@ -40,10 +40,6 @@ export const editData = async (data, config) => {
   const rows = [{ cells }, { cells }, { cells }];
   const worksheet = { rows, name: "worksheet1" };
 
-  const sheet1 = buildSheetXml(worksheet);
-  const sheet2 = buildSheetXml(worksheet);
-  const allSheetsNames = ["sheet1", "my nice sheet"];
-  // await unlink(resolve(config.tempDir, "xl", "worksheets", "sheet1.xml"));
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";
 
@@ -56,6 +52,23 @@ const createFileObjectFromSheets = (...sheets) => {
     workbookXml: { ...xlsxFiles.workbookXml },
     workbookRels: { ...xlsxFiles.workbookRels },
   };
+  const allStyles = [];
+
+  sheets.forEach((s) =>
+    s.rows.forEach((r) =>
+      r.cells.forEach((c) => {
+        const styleProps = Object.keys(c.style);
+        if (styleProps.length) {
+          const stringifiedStyle = JSON.stringify(styleProps);
+          if (!allStyles.includes(stringifiedStyle)) {
+            allStyles.push(stringifiedStyle);
+          }
+          c.style.styleId = allStyles.indexOf(stringifiedStyle).toString();
+        }
+      })
+    )
+  );
+
   const sheetNames = sheets.map((s) => s.name);
   xmlFilesObject.workbookXml.content = xlsContent.buildWorkbookXml(sheetNames);
   xmlFilesObject.workbookRels.content =
