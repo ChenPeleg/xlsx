@@ -26,8 +26,10 @@ export const buildStyleSheets = (allStyles) => {
   const fills = allStylesContainers.background.map((bg) => buildFill(bg));
   if (fills.length) {
     styleXml = styleXml.replace(
-      `<fills count="4"><fill/>`,
-      `<fills count="${fills.length + 4}" > 
+      `<fills count="2"><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>`,
+      `<fills count="${
+        fills.length + 2
+      }" ><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill> 
      ${fills.join("")}`
     );
   }
@@ -41,7 +43,10 @@ export const buildStyleSheets = (allStyles) => {
   if (cellXfs.length) {
     styleXml = styleXml.replace(
       `<cellXfs count="1"><xf/>`,
-      `<cellXfs count="${cellXfs.length + 1}"> ${cellXfs.join("")}`
+      `<cellXfs count="${
+        cellXfs.length + 1
+      }"><xf borderId="0" fillId="0" fontId="0" numFmtId="0" xfId="0">
+      </xf> ${cellXfs.join("")}`
     );
   }
   if (true) return styleXml;
@@ -112,25 +117,7 @@ const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
         </font>
        
     </fonts>
-    <fills count="4"><fill/>
-        <fill>
-            <patternFill patternType="none" />
-        </fill> 
-        <fill>
-            <patternFill patternType="solid">
-                <fgColor rgb="FFEA9999" />
-                <bgColor rgb="FFEA9999" />
-            </patternFill>
-        </fill>
-        <fill>
-            <patternFill patternType="solid">
-                <fgColor rgb="FFFFF2CC" />
-                <bgColor rgb="FFFFF2CC" />
-            </patternFill>
-        </fill>
-        <fill>
-        <patternFill patternType="lightGray" />
-    </fill>
+    <fills count="2"><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>
         
     </fills>
     <borders count="1">
@@ -139,10 +126,8 @@ const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
     <cellStyleXfs count="1">
         <xf borderId="0" fillId="0" fontId="0" numFmtId="0" applyAlignment="1" applyFont="1" />
     </cellStyleXfs>
-    <cellXfs count="3"><xf/>
-        <xf borderId="0" fillId="2" fontId="0" numFmtId="0" xfId="0" applyAlignment="1"
-        applyFill="1" applyFont="1">
-            <alignment readingOrder="0" shrinkToFit="0" vertical="bottom" wrapText="0" />
+    <cellXfs count="1"><xf/>
+        <xf borderId="0" fillId="0" fontId="0" numFmtId="0" xfId="0">
         </xf> 
     </cellXfs>
     <cellStyles count="1">
