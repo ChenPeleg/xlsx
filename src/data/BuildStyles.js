@@ -9,13 +9,8 @@ export const buildStyleSheets = (allStyles) => {
     bold: [],
     border: [],
   };
-  const styleIdModel = {
-    // background: -1,
-    // color: -1,
-    // fontSize: -1,
-    // bold: -1,
-    // border: -1,
-  };
+  const styleIdModel = {};
+  // @ts-ignore
   const stylesWithIds = allStyles.map((s) => ({ ...styleIdModel }));
   let styleXml = xlsxFiles.styles.content;
   allStyles.forEach((s, i) => {
@@ -27,17 +22,31 @@ export const buildStyleSheets = (allStyles) => {
       stylesWithIds[i][prop] = allStylesContainers[prop].indexOf(trait);
     }
   });
-  console.log(
-    JSON.stringify(stylesWithIds),
-    JSON.stringify(allStylesContainers)
-  );
-  const cellStyleXfs = `<cellStyleXfs count="1">
-        <xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>
-    </cellStyleXfs>`;
+
+  // @ts-ignore
+  const cellStyleXfs = ``;
   const fills = allStylesContainers.background.map((bg) => buildFill(bg));
-  if (fills) {
-    styleXml = styleXml.replace();
+  if (fills.length) {
+    styleXml = styleXml.replace(
+      "<fills/>",
+      `<fills count="${fills.length}"> ${fills.join("")}</fills>`
+    );
   }
+  let cellXfs = stylesWithIds.map((stl) => {
+    // @ts-ignore
+    let { background, color, fontSize, bold, border } = stl;
+    background = `fillId="${background}"`;
+
+    return `
+    <xf ${background}/>`;
+  });
+  if (cellXfs.length) {
+    styleXml = styleXml.replace(
+      "<cellXfs/>",
+      `<cellXfs count="${cellXfs.length}">${cellXfs.join("")}</cellXfs>`
+    );
+  }
+  return styleXml;
 };
 const buildFill = (color) => {
   if (colorMap[color.toLowerCase()]) {
