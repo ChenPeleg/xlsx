@@ -14,7 +14,7 @@ import { buildStyleSheets } from "./BuildStyles.js";
  */
 const CellClass = (value, options) => {
   /** @type {"empty" | "string" | "number"} */
-  let dataType = "empty";
+  let dataType = "number";
   if (isNaN(value)) {
     dataType = "string";
   } else if (!value) {
@@ -35,8 +35,8 @@ const CellClass = (value, options) => {
 export const editData = async (data, config) => {
   const cell1 = CellClass(4234);
   const cell2 = CellClass("I am a text");
-  cell1.style.background = "red";
-  cell2.style.background = "blue";
+  cell1.style.background = "FFCCAA";
+  cell2.style.background = "FFCCAA";
   const cells = [cell1, cell2, CellClass(12)];
   const rows = [{ cells }, { cells }, { cells }];
   const worksheet = { rows, name: "worksheet1" };
