@@ -35,10 +35,11 @@ const CellClass = (value, options) => {
 export const editData = async (data, config) => {
   const cell1 = CellClass(4234);
   const cell2 = CellClass(42331234);
-  const cell3 = CellClass("I am a text");
+  const cell3 = CellClass(123);
   cell1.style.background = "FFCC00";
-  cell2.style.background = "12CC54";
-  const cells = [cell1, cell2, CellClass(12)];
+  cell2.style.background = "FF0011";
+  cell3.style.background = "22EE11";
+  const cells = [cell1, cell2, cell3];
   const rows = [{ cells }];
   const worksheet = { rows, name: "worksheet1" };
 
