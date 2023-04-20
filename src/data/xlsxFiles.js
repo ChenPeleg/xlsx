@@ -219,15 +219,15 @@ export const xlsxFiles = {
   styles: {
     url: ["xl", "styles.xml"],
     content: `<stylesheet xmls="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
-    <numFmts />
-    <fonts />
-    <fills />
-    <borders />
-    <cellStyleXfs />
-    <cellXfs />
-    <cellStyles />
-    <dxfs />
-    <tableStyles />
+    <numFmts/>
+    <fonts/>
+    <fills/>
+    <borders/>
+    <cellStyleXfs/>
+    <cellXfs/>
+    <cellStyles/>
+    <dxfs/>
+    <tableStyles/>
 </stylesheet>`,
   },
   workbookXml: {
