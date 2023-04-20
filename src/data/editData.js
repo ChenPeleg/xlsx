@@ -74,7 +74,9 @@ const createFileObjectFromSheets = (...sheets) => {
       })
     )
   );
-  buildStyleSheets(allStyles.map((s) => JSON.parse(s)));
+  xmlFilesObject.styles.content = buildStyleSheets(
+    allStyles.map((s) => JSON.parse(s))
+  );
 
   const sheetNames = sheets.map((s) => s.name);
   xmlFilesObject.workbookXml.content = xlsContent.buildWorkbookXml(sheetNames);
