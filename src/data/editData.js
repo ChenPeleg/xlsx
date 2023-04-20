@@ -39,7 +39,7 @@ export const editData = async (data, config) => {
   cell1.style.background = "FFCC00";
   cell2.style.background = "12CC54";
   const cells = [cell1, cell2, CellClass(12)];
-  const rows = [{ cells }, { cells }, { cells }];
+  const rows = [{ cells }];
   const worksheet = { rows, name: "worksheet1" };
 
   // const worksheet2 = { ...worksheet };
