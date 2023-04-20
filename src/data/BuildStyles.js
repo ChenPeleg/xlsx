@@ -23,8 +23,6 @@ export const buildStyleSheets = (allStyles) => {
     }
   });
 
-  // @ts-ignore
-  const cellStyleXfs = ``;
   const fills = allStylesContainers.background.map((bg) => buildFill(bg));
   if (fills.length) {
     styleXml = styleXml.replace(
@@ -32,13 +30,43 @@ export const buildStyleSheets = (allStyles) => {
       `<fills count="${fills.length}"> ${fills.join("")}</fills>`
     );
   }
+
+  const numFmts = `<fonts count="1" x14ac:knownFonts="1"><font>
+  <sz val="11"/>
+  <color theme="1"/>
+  <name val="Arial"/>
+  <family val="2"/>
+  <charset val="177"/>
+  <scheme val="minor"/>
+</font></fonts>`;
+  const fonts = `<fonts count="1"><font>
+<sz val="11"/>
+<color theme="1"/>
+<name val="Arial"/>
+<family val="2"/>
+<charset val="177"/>
+<scheme val="minor"/>
+</font></fonts>`;
+  styleXml = styleXml.replace("<fonts/>", fonts);
+  styleXml = styleXml.replace(
+    "<cellStyleXfs/>",
+    `<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>
+</cellStyleXfs>`
+  );
+  styleXml = styleXml.replace(
+    "<cellStyles/>",
+    `<cellStyles count="1">
+    <cellStyle name="Normal" xfId="0" builtinId="0"/>
+</cellStyles>`
+  );
+  styleXml = styleXml.replace("<numFmts/>", "");
   let cellXfs = stylesWithIds.map((stl) => {
     // @ts-ignore
     let { background, color, fontSize, bold, border } = stl;
     background = `fillId="${background}"`;
 
     return `
-    <xf ${background}/>`;
+    <xf numFmtId="0" fontId="0" ${background}/>`;
   });
   if (cellXfs.length) {
     styleXml = styleXml.replace(
