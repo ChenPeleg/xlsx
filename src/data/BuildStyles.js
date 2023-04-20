@@ -27,7 +27,9 @@ export const buildStyleSheets = (allStyles) => {
   if (fills.length) {
     styleXml = styleXml.replace(
       "<fills/>",
-      `<fills count="${fills.length}"> ${fills.join("")}</fills>`
+      `<fills count="${fills.length}" > <fill>
+      <patternFill patternType="none" />
+  </fill>  ${fills.join("")}</fills>`
     );
   }
 
@@ -71,7 +73,7 @@ export const buildStyleSheets = (allStyles) => {
     let { background, color, fontSize, bold, border } = stl;
     background = `fillId="${+background}" applyFill="1"`;
     return `
-    <xf numFmtId="0" fontId="0" ${background}/>`;
+    <xf numFmtId="0" fontId="0" ${background} borderId="0" xfId="0" />`;
   });
   styleXml = styleXml.replace(
     "<cellStyles/>",
@@ -86,21 +88,88 @@ export const buildStyleSheets = (allStyles) => {
   if (cellXfs.length) {
     styleXml = styleXml.replace(
       "<cellXfs/>",
-      `<cellXfs count="${cellXfs.length}">${cellXfs.join("")}</cellXfs>`
+      `<cellXfs count="${
+        cellXfs.length + 1
+      }"><xf borderId="0" fillId="0" fontId="0" numFmtId="0" xfId="0"  /> ${cellXfs.join(
+        ""
+      )}</cellXfs>`
     );
   }
-  return styleXml;
+  return googlesheetStyles;
 };
+const googlesheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+    xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <fonts count="2">
+        <font>
+            <sz val="10.0" />
+            <color rgb="FF000000" />
+            <name val="Arial" />
+            <scheme val="minor" />
+        </font>
+        <font>
+            <color theme="1" />
+            <name val="Arial" />
+            <scheme val="minor" />
+        </font>
+        <font/>
+    </fonts>
+    <fills count="4">
+        <fill>
+            <patternFill patternType="none" />
+        </fill>
+        <fill>
+            <patternFill patternType="lightGray" />
+        </fill>
+        <fill>
+            <patternFill patternType="solid">
+                <fgColor rgb="FFEA9999" />
+                <bgColor rgb="FFEA9999" />
+            </patternFill>
+        </fill>
+        <fill>
+            <patternFill patternType="solid">
+                <fgColor rgb="FFFFF2CC" />
+                <bgColor rgb="FFFFF2CC" />
+            </patternFill>
+        </fill>
+        <fill/>
+    </fills>
+    <borders count="1">
+        <border />
+    </borders>
+    <cellStyleXfs count="1">
+        <xf borderId="0" fillId="0" fontId="0" numFmtId="0" applyAlignment="1" applyFont="1" />
+    </cellStyleXfs>
+    <cellXfs count="3">
+        <xf borderId="0" fillId="0" fontId="0" numFmtId="0" xfId="0" applyAlignment="1"
+            applyFont="1">
+            <alignment readingOrder="0" shrinkToFit="0" vertical="bottom" wrapText="0" />
+        </xf>
+        <xf borderId="0" fillId="2" fontId="1" numFmtId="0" xfId="0" applyAlignment="1"
+            applyFill="1" applyFont="1">
+            <alignment readingOrder="0" />
+        </xf>
+        <xf borderId="0" fillId="3" fontId="1" numFmtId="0" xfId="0" applyAlignment="1"
+            applyFill="1" applyFont="1">
+            <alignment readingOrder="0" />
+        </xf>
+    </cellXfs>
+    <cellStyles count="1">
+        <cellStyle xfId="0" name="Normal" builtinId="0" />
+    </cellStyles>
+    <dxfs count="0" />
+</styleSheet>`;
+
 const buildFill = (color) => {
   if (colorMap[color.toLowerCase()]) {
     color = colorMap[color.toLowerCase()];
   }
+  const colorAtt = `rgb="FF${color.replace("#", "")}"`;
 
-  return `<fill><patternFill patternType="solid"><fgColor rgb="FF${color.replace(
-    "#",
-    ""
-  )}"/>
-  <bgColor indexed="64"/></patternFill></fill>`;
+  return `<fill><patternFill patternType="solid"><fgColor ${colorAtt} />
+  <bgColor ${colorAtt} /></patternFill></fill>`;
 };
 const colorMap = {
   black: "#000000",
