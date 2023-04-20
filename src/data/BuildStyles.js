@@ -39,10 +39,10 @@ export const buildStyleSheets = (allStyles) => {
     <xf numFmtId="0" fontId="0" ${background} borderId="0" xfId="0" />`;
   });
   if (cellXfs.length) {
-    // styleXml = styleXml.replace(
-    //   `<cellXfs count="3"><xf/>`,
-    //   `<cellXfs count="${cellXfs.length + 3}"> ${cellXfs.join("")}`
-    // );
+    styleXml = styleXml.replace(
+      `<cellXfs count="1"><xf/>`,
+      `<cellXfs count="${cellXfs.length + 1}"> ${cellXfs.join("")}`
+    );
   }
   if (true) return styleXml;
   const numFmts = `<fonts count="1" x14ac:knownFonts="1"><font>
@@ -143,15 +143,7 @@ const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
         <xf borderId="0" fillId="2" fontId="0" numFmtId="0" xfId="0" applyAlignment="1"
         applyFill="1" applyFont="1">
             <alignment readingOrder="0" shrinkToFit="0" vertical="bottom" wrapText="0" />
-        </xf>
-        <xf borderId="0" fillId="2" fontId="1" numFmtId="0" xfId="0" applyAlignment="1"
-            applyFill="1" applyFont="1">
-            <alignment readingOrder="0" />
-        </xf>
-        <xf borderId="0" fillId="3" fontId="1" numFmtId="0" xfId="0" applyAlignment="1"
-            applyFill="1" applyFont="1">
-            <alignment readingOrder="0" />
-        </xf>
+        </xf> 
     </cellXfs>
     <cellStyles count="1">
         <cellStyle xfId="0" name="Normal" builtinId="0" />
