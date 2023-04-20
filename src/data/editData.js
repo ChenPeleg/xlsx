@@ -33,13 +33,17 @@ const CellClass = (value, options) => {
  * @returns {Promise<Record<string, { url: string[]; content: string }>>}
  */
 export const editData = async (data, config) => {
-  const cell1 = CellClass(4234);
-  const cell2 = CellClass(42331234);
-  const cell3 = CellClass(123);
-  cell1.style.background = "FFCC00";
-  cell2.style.background = "FF0011";
-  cell3.style.background = "22EE11";
-  const cells = [cell1, cell2, cell3];
+  const cell1 = CellClass(10);
+  const cell2 = CellClass(20);
+  const cell3 = CellClass(30);
+  const cell4 = CellClass(0);
+  const cell5 = CellClass(50);
+  cell1.style.background = "FFFF00"; // yellow
+  cell2.style.background = "FFD700"; // gold
+  cell3.style.background = "F08080"; //salmon
+  cell4.style.background = "00FFFF"; // aqua
+  cell5.style.background = "F5DEB3"; //wheat
+  const cells = [cell1, cell2, cell3, cell4, cell5];
   const rows = [{ cells }];
   const worksheet = { rows, name: "worksheet1" };
 

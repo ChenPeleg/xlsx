@@ -6,7 +6,7 @@ import { columnIndexToLetter } from "./xlsxUtils.js";
  * @returns {string}
  */
 const buildCell = (cellIndex, cell) => {
-  const cellStyle = cell.style?.styleId ? `s="${+cell.style.styleId}"` : "";
+  const cellStyle = cell.style?.styleId ? `s="${+cell.style.styleId + 1}"` : "";
   if (cell.dataType === "string") {
     return `<c r="${cellIndex}" ${""} t="inlineStr" >  
     <is><t>${cell.value}</t></is>  
