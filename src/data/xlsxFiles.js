@@ -218,7 +218,9 @@ export const xlsxFiles = {
   },
   styles: {
     url: ["xl", "styles.xml"],
-    content: `<stylesheet xmls="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+    content: `<stylesheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+    xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <numFmts/>
     <fonts/>
     <fills/>
