@@ -53,12 +53,7 @@ export const buildStyleSheets = (allStyles) => {
     `<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>
 </cellStyleXfs>`
   );
-  styleXml = styleXml.replace(
-    "<cellStyles/>",
-    `<cellStyles count="1">
-    <cellStyle name="Normal" xfId="0" builtinId="0"/>
-</cellStyles>`
-  );
+
   styleXml = styleXml.replace(
     "<borders/>",
     `<borders count="1">
@@ -75,10 +70,19 @@ export const buildStyleSheets = (allStyles) => {
     // @ts-ignore
     let { background, color, fontSize, bold, border } = stl;
     background = `fillId="${+background}" applyFill="1"`;
-
     return `
     <xf numFmtId="0" fontId="0" ${background}/>`;
   });
+  styleXml = styleXml.replace(
+    "<cellStyles/>",
+    `<cellStyles count="${cellXfs.length + 1}">
+    ${cellXfs.map(
+      (c, i) =>
+        `<cellStyle name="styeName_${i}" xfId="${i}" builtinId="${i + 100}"/>`
+    )}
+    <cellStyle name="Normal" xfId="0" builtinId="0"/>
+</cellStyles>`
+  );
   if (cellXfs.length) {
     styleXml = styleXml.replace(
       "<cellXfs/>",

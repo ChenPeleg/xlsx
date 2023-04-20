@@ -34,17 +34,18 @@ const CellClass = (value, options) => {
  */
 export const editData = async (data, config) => {
   const cell1 = CellClass(4234);
-  const cell2 = CellClass("I am a text");
-  cell1.style.background = "FFCCAA";
-  cell2.style.background = "FFCCBB";
+  const cell2 = CellClass(42331234);
+  const cell3 = CellClass("I am a text");
+  cell1.style.background = "FFCC00";
+  cell2.style.background = "12CC54";
   const cells = [cell1, cell2, CellClass(12)];
   const rows = [{ cells }, { cells }, { cells }];
   const worksheet = { rows, name: "worksheet1" };
 
-  const worksheet2 = { ...worksheet };
-  worksheet2.name = "second";
+  // const worksheet2 = { ...worksheet };
+  // worksheet2.name = "second";
 
-  return createFileObjectFromSheets(worksheet, worksheet2);
+  return createFileObjectFromSheets(worksheet);
 };
 /** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
 const createFileObjectFromSheets = (...sheets) => {
