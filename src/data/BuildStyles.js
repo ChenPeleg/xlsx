@@ -40,8 +40,8 @@ export const buildStyleSheets = (allStyles) => {
   <scheme val="minor"/>
 </font></fonts>`;
   const fonts = `<fonts count="1"><font>
-<sz val="11"/>
-<color theme="1"/>
+<sz val="11"/> 
+<color rgb="FFFF0000"/>
 <name val="Arial"/>
 <family val="2"/>
 <charset val="177"/>
@@ -59,11 +59,22 @@ export const buildStyleSheets = (allStyles) => {
     <cellStyle name="Normal" xfId="0" builtinId="0"/>
 </cellStyles>`
   );
+  styleXml = styleXml.replace(
+    "<borders/>",
+    `<borders count="1">
+  <border>
+      <left/>
+      <right/>
+      <top/>
+      <bottom/>
+      <diagonal/>
+  </border></borders>`
+  );
   styleXml = styleXml.replace("<numFmts/>", "");
   let cellXfs = stylesWithIds.map((stl) => {
     // @ts-ignore
     let { background, color, fontSize, bold, border } = stl;
-    background = `fillId="${background}"`;
+    background = `fillId="${+background}" applyFill="1"`;
 
     return `
     <xf numFmtId="0" fontId="0" ${background}/>`;
