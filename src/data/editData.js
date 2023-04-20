@@ -36,7 +36,7 @@ export const editData = async (data, config) => {
   const cell1 = CellClass(4234);
   const cell2 = CellClass("I am a text");
   cell1.style.background = "FFCCAA";
-  cell2.style.background = "FFCCAA";
+  cell2.style.background = "FFCCBB";
   const cells = [cell1, cell2, CellClass(12)];
   const rows = [{ cells }, { cells }, { cells }];
   const worksheet = { rows, name: "worksheet1" };
