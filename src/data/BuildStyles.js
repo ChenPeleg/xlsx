@@ -26,7 +26,7 @@ export const buildStyleSheets = (allStyles) => {
   const fills = allStylesContainers.background.map((bg) => buildFill(bg));
   if (fills.length) {
     styleXml = styleXml.replace(
-      `<fills count="2"><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>`,
+      `<fills count="2"><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>`,
       `<fills count="${
         fills.length + 2
       }" ><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill> 
@@ -36,7 +36,7 @@ export const buildStyleSheets = (allStyles) => {
   let cellXfs = stylesWithIds.map((stl) => {
     // @ts-ignore
     let { background, color, fontSize, bold, border } = stl;
-    background = `fillId="${+background}" applyFill="1"`;
+    background = `fillId="${+background + 2}" applyFill="1"`;
     return `
     <xf numFmtId="0" fontId="0" ${background} borderId="0" xfId="0" />`;
   });
@@ -117,7 +117,7 @@ const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
         </font>
        
     </fonts>
-    <fills count="2"><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>
+    <fills count="2"><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>
         
     </fills>
     <borders count="1">
