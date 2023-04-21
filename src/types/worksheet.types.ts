@@ -7,6 +7,7 @@ export interface Cell {
 }
 export interface Row {
   cells: Cell[];
+  height? : number
 }
 
 export interface Sheet {
