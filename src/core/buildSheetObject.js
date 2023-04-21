@@ -16,7 +16,7 @@ export const buildSheetObject = async () => {
   // cell5.style.background = "F5DEB3"; //wheat
   const cells = [cell1, cell2, cell3, cell4, cell5];
   const rows = [{ cells, height: 54 }];
-  const worksheet = { rows, name: "worksheet1" };
+  const worksheet = { rows, name: "worksheet1", columnWidth: [50, , , 30] };
 
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";

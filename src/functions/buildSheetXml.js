@@ -38,7 +38,7 @@ export const buildSheetXml = (worksheet) => {
   const rows = worksheet.rows;
   const rowsLength = rows.length || 3;
   const maxColumns = Math.max(...rows.map((r) => r.cells.length)) || 3;
-  const columnWidth = worksheet.columnWidth.length
+  const columnWidth = worksheet.columnWidth?.length
     ? `<cols> ${worksheet.columnWidth
         .map((w, i) =>
           w
@@ -49,7 +49,7 @@ export const buildSheetXml = (worksheet) => {
         )
         .filter((c) => c)}</cols>`
     : ``;
-  let sheetText = `<sheetData>`;
+  let sheetText = `${columnWidth}<sheetData>`;
   rows.forEach((r, i) => {
     sheetText += buildRow(i, r);
   });
