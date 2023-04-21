@@ -6,11 +6,12 @@ export const buildSheetObject = async () => {
   const cell3 = createCell(30);
   const cell4 = createCell(0);
   const cell5 = createCell(50);
-  cell1.style.background = "FFFF00"; // yellow
-  cell2.style.background = "FFD700"; // gold
-  cell3.style.background = "F08080"; //salmon
-  cell4.style.background = "00FFFF"; // aqua
-  cell5.style.background = "F5DEB3"; //wheat
+  // cell1.style.background = "FFFF00"; // yellow
+  cell2.style.background = "red"; // gold
+  cell2.style.font = { color: "white" }; // gold
+  // cell3.style.background = "F08080"; //salmon
+  // cell4.style.background = "00FFFF"; // aqua
+  // cell5.style.background = "F5DEB3"; //wheat
   const cells = [cell1, cell2, cell3, cell4, cell5];
   const rows = [{ cells }];
   const worksheet = { rows, name: "worksheet1" };
@@ -18,7 +19,7 @@ export const buildSheetObject = async () => {
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";
 
-  return createFileObjectFromSheets(worksheet, worksheet2);
+  return createFileObjectFromSheets(worksheet);
 };
 /**
  * A basic class to describe a worksheet cell

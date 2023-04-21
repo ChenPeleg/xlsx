@@ -35,10 +35,12 @@ export const buildStyleSheets = (allStyles) => {
   }
   let cellXfs = stylesWithIds.map((stl) => {
     // @ts-ignore
-    let { background, color, fontSize, bold, border } = stl;
+    let { background, color, font, bold, border } = stl;
     background = `fillId="${+background + 2}" applyFill="1"`;
+    console.log(font);
+    font = !isNaN(font) ? `fontId="${font + 2}" applyFont="1"` : `fontId="0"`;
     return `
-    <xf numFmtId="0" fontId="0" ${background} borderId="0" xfId="0" />`;
+    <xf numFmtId="0" ${font} ${background} borderId="0" xfId="0" />`;
   });
   if (cellXfs.length) {
     styleXml = styleXml.replace(
@@ -50,11 +52,14 @@ export const buildStyleSheets = (allStyles) => {
     );
   }
 
-  // const fonts = allStylesContainers.font.map((f) => buildFont(f));
-  // styleXml = styleXml.replace(
-  //   `<fonts count="2">`,
-  //   `<fonts count="${fonts.length}">`
-  // );
+  const fonts = allStylesContainers.font.map((f) => buildFont(f));
+  if (fonts.length) {
+    styleXml = styleXml.replace(
+      `<fonts count="2">`,
+      `<fonts count="${fonts.length + 2}">`
+    );
+    styleXml = styleXml.replace(`<font/>`, fonts.join(" "));
+  }
 
   return styleXml;
 };
@@ -120,8 +125,8 @@ const buildFont = (font) => {
     ? `<color ${buildColorAtt(color)} />`
     : `<color theme="1" />`;
   return `<font> ${bold ? "</b>" : ""} 
-  <sz val="10.0" />
-  <color rgb="FF000000" />
+   ${sizeStr}
+   ${colorAtt}
   <name val="Arial" />
   <scheme val="minor" />
 </font>`;
