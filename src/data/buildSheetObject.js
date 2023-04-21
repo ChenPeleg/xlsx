@@ -1,4 +1,4 @@
-import { createFileObjectFromSheets } from "../data/createXlsObject.js";
+import { createFileObjectFromSheets } from "./createXlsObject.js";
 
 export const buildSheetObject = async () => {
   const cell1 = createCell(10);

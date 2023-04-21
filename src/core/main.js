@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { deleteFilesFromDir, runZipper } from "../utils/file-utils.js";
 import { xlsContent } from "../data/xlsxBuilder.js";
-import { buildSheetObject } from "./buildSheetObject.js";
+import { buildSheetObject } from "../data/buildSheetObject.js";
 
 /** @param {{ tempDir: string }} config */
 
