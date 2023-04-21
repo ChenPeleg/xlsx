@@ -20,7 +20,7 @@ export const buildExampleSheetsData = async () => {
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";
 
-  return { name: "workbook", sheets: [worksheet] };
+  return { name: "workbook2", sheets: [worksheet] };
 };
 /**
  * A basic class to describe a worksheet cell
