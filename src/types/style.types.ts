@@ -1,13 +1,12 @@
 
 
-type CellBorder = 'top' | 'bottom' | 'right' | 'left' | 'all' | {
+export type CellBorder = 'top' | 'bottom' | 'right' | 'left' | 'all' | {
   position: 'top' | 'bottom' | 'right' | 'left' | 'all';
-  width: number;
-  color : string
+  width?: number;
+  color? : string
 }
 export interface CellStyle {
-    background?: string;
-    color? : string;  
+    background?: string; 
     font? : {
       size?: number;
       bold?: boolean;

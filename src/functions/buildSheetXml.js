@@ -1,5 +1,3 @@
-import { columnIndexToLetter } from "./xlsxUtils.js";
-
 /**
  * @param {string} cellIndex
  * @param {import("../types/worksheet.types.js").Cell} cell
@@ -46,3 +44,12 @@ export const buildSheetXml = (worksheet) => {
   sheetText += `</sheetData>`;
   return sheetText;
 };
+function columnIndexToLetter(columnNumber) {
+  let columnLetter = "";
+  while (columnNumber > 0) {
+    let remainder = (columnNumber - 1) % 26;
+    columnLetter = String.fromCharCode(65 + remainder) + columnLetter;
+    columnNumber = Math.floor((columnNumber - remainder) / 26);
+  }
+  return columnLetter;
+}
