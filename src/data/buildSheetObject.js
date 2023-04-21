@@ -1,6 +1,5 @@
-import { createFileObjectFromSheets } from "./createXlsObject.js";
-
-export const buildSheetObject = async () => {
+/** @returns {Promise<import("../types/worksheet.types.js").Workbook>} */
+export const buildExampleSheetsData = async () => {
   const cell1 = createCell(10);
   const cell2 = createCell("20 abc");
   const cell3 = createCell(30);
@@ -21,7 +20,7 @@ export const buildSheetObject = async () => {
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";
 
-  return createFileObjectFromSheets(worksheet);
+  return { name: "workbook", sheets: [worksheet] };
 };
 /**
  * A basic class to describe a worksheet cell
