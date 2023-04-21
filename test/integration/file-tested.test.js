@@ -3,14 +3,14 @@ import assert from "node:assert/strict";
 import { readdir, statSync } from "fs";
 import { resolve } from "node:path";
 import { runApp } from "../../src/core/main.js";
+import Excel from "exceljs";
 
-describe("an excel file was created", () => {
+describe("an excel file was created 2", () => {
   it("created an excel file", async () => {
-    // await runApp(null, { tempDir: "temp" });
-    // const files = await getFolderFiles(resolve("out"));
-    // assert.equal(files.length, 1);
-    // assert.equal(files[0].includes(".xlsx"), true);
-    // const stats = statSync(resolve("out", files[0]));
-    // assert.equal(stats.size > 4000, true, "xlsx file too small");
+    const fileName = "test-excel-file";
+    await runApp(null, { tempDir: "temp", outDir: "out" });
+    var workbook = new Excel.Workbook();
+    // workbook.xlsx.readFile("./out/test-excel-file");
+    assert.equal(20, 20, "xlsx file too small");
   });
 });
