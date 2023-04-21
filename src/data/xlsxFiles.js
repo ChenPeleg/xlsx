@@ -1,4 +1,4 @@
-export const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+const baseSheetStyle = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
     xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
@@ -255,7 +255,7 @@ export const xlsxFiles = {
   },
   styles: {
     url: ["xl", "styles.xml"],
-    content: googleSheetStyles,
+    content: baseSheetStyle,
   },
   workbookXml: {
     url: ["xl", "workbook.xml"],

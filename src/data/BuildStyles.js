@@ -1,4 +1,4 @@
-import { googleSheetStyles, xlsxFiles } from "./xlsxFiles.js";
+import { xlsxFiles } from "./xlsxFiles.js";
 
 /** @param {import("../types/style.types.js").CellStyle[]} allStyles */
 export const buildStyleSheets = (allStyles) => {
