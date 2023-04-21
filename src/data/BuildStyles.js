@@ -1,4 +1,4 @@
-import { xlsxFiles } from "./xlsxFiles.js";
+import { googleSheetStyles, xlsxFiles } from "./xlsxFiles.js";
 
 /** @param {import("../types/style.types.js").CellStyle[]} allStyles */
 export const buildStyleSheets = (allStyles) => {
@@ -12,13 +12,9 @@ export const buildStyleSheets = (allStyles) => {
   const styleIdModel = {};
 
   const stylesWithIds = allStyles.map((s) => ({ ...styleIdModel }));
-  let styleXml = googleSheetStyles; // xlsxFiles.styles.content;
+  let styleXml = xlsxFiles.styles.content;
 
   styleXml = xlsxFiles.styles.content;
-  console.log(
-    "xlsxFiles.styles.content === googleSheetStyles",
-    xlsxFiles.styles.content === googleSheetStyles
-  );
 
   allStyles.forEach((s, i) => {
     for (const prop in s) {
@@ -83,42 +79,7 @@ export const buildStyleSheets = (allStyles) => {
   }
   return styleXml;
 };
-export const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
-    xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
-    <fonts count="2">
-        <font>
-            <sz val="10.0" />
-            <color rgb="FF000000" />
-            <name val="Arial" />
-            <scheme val="minor" />
-        </font>
-        <font>
-            <color theme="1" />
-            <name val="Arial" />
-            <scheme val="minor" />
-        </font>
-        <font/> 
-    </fonts>
-    <fills count="2"><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>
-        
-    </fills>
-    <borders count="1">
-        <border />
-    </borders>
-    <cellStyleXfs count="1">
-        <xf borderId="0" fillId="0" fontId="0" numFmtId="0" applyAlignment="1" applyFont="1" />
-    </cellStyleXfs>
-    <cellXfs count="1"><xf/>
-        <xf borderId="0" fillId="0" fontId="0" numFmtId="0" xfId="0">
-        </xf> 
-    </cellXfs>
-    <cellStyles count="1">
-        <cellStyle xfId="0" name="Normal" builtinId="0" />
-    </cellStyles>
-    <dxfs count="0" />
-</styleSheet>`;
+
 const buildColorAtt = (color) => {
   if (colorMap[color.toLowerCase()]) {
     color = colorMap[color.toLowerCase()];
