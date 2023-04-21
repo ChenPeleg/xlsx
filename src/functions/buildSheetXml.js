@@ -38,6 +38,17 @@ export const buildSheetXml = (worksheet) => {
   const rows = worksheet.rows;
   const rowsLength = rows.length || 3;
   const maxColumns = Math.max(...rows.map((r) => r.cells.length)) || 3;
+  const columnWidth = worksheet.columnWidth.length
+    ? `<cols> ${worksheet.columnWidth
+        .map((w, i) =>
+          w
+            ? `<col customWidth="1" min="${i + 1}" max="${
+                i + 1
+              }" width="${w}.00" />`
+            : null
+        )
+        .filter((c) => c)}</cols>`
+    : ``;
   let sheetText = `<sheetData>`;
   rows.forEach((r, i) => {
     sheetText += buildRow(i, r);

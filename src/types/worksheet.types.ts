@@ -13,6 +13,7 @@ export interface Row {
 export interface Sheet {
   rows: Row[];
   name: string;
+  columnWidth?: number[] 
 }
 export interface Workbook {
     name : string;
