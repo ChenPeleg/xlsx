@@ -18,7 +18,7 @@ const getFolderFiles = (fullPath) => {
 
 describe("an excel file was created", () => {
   it("created an excel file", async () => {
-    await runApp(null, { tempDir: "temp" });
+    await runApp(null, { tempDir: "temp", outDir: "out" });
     const files = await getFolderFiles(resolve("out"));
     assert.equal(files.length, 1);
     assert.equal(files[0].includes(".xlsx"), true);
