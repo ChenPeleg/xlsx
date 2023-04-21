@@ -6,7 +6,7 @@
 const buildCell = (cellIndex, cell) => {
   const cellStyle = cell.style?.styleId ? `s="${+cell.style.styleId + 1}"` : "";
   if (cell.dataType === "string") {
-    return `<c r="${cellIndex}" ${""} t="inlineStr" >  
+    return `<c r="${cellIndex}" ${cellStyle} t="inlineStr" >  
     <is><t>${cell.value}</t></is>  
   </c>`;
   }
