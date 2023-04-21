@@ -139,7 +139,7 @@ const buildBorder = (borderObjects) => {
   });
   const allPositionOrder = ["left", "right", "top", "bottom"];
   const sortByPos = (a, b) =>
-    allPositionOrder.indexOf(a) - allPositionOrder.indexOf(b);
+    allPositionOrder.indexOf(a.position) - allPositionOrder.indexOf(b.position);
   if (fullBorderObjects[0].position === "all") {
     const border = fullBorderObjects[0];
     // @ts-ignore
