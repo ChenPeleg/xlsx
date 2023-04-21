@@ -60,7 +60,7 @@ export const buildStyleSheets = (allStyles) => {
     );
     styleXml = styleXml.replace(`<font/>`, fonts.join(" "));
   }
-  const borders = allStylesContainers.border.map(b=>buildBorder(b))
+  const borders = allStylesContainers.border.map((b) => buildBorder(b));
   if (borders.length) {
     styleXml = styleXml.replace(
       `<borders count="1">
@@ -69,7 +69,9 @@ export const buildStyleSheets = (allStyles) => {
       `<borders count="${borders.length + 1}">
       <border /> ${borders.join(" ")}
   </borders>`
-    ); 
+    );
+    styleXml = styleXml.replace(`<font/>`, fonts.join(" "));
+  }
   return styleXml;
 };
 const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
