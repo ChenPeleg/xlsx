@@ -60,7 +60,16 @@ export const buildStyleSheets = (allStyles) => {
     );
     styleXml = styleXml.replace(`<font/>`, fonts.join(" "));
   }
-
+  const borders = allStylesContainers.border.map(b=>buildBorder(b))
+  if (borders.length) {
+    styleXml = styleXml.replace(
+      `<borders count="1">
+        <border />
+    </borders>`,
+      `<borders count="${borders.length + 1}">
+      <border /> ${borders.join(" ")}
+  </borders>`
+    ); 
   return styleXml;
 };
 const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -105,6 +114,36 @@ const buildColorAtt = (color) => {
   }
   return `rgb="FF${color.replace("#", "")}"`;
 };
+/** @param {import("../types/style.types.js").CellBorder[]} borderObjects */
+const buildBorder = (borderObjects) => {
+  const fullBorderObjects = borderObjects.map((bo) => {
+    /**
+     * @type {{
+     *   position: "top" | "bottom" | "right" | "left" | "all";
+     *   width?: number;
+     *   color?: string;
+     * }}
+     */
+    const border = { color: "000000", position: "all", width: 1 };
+    if (typeof bo === "string") {
+      border.position = bo;
+    } else {
+      border.color = bo.color || border.color;
+      border.width = bo.width || border.width;
+    }
+    return border;
+  });
+
+  const borderXml = fullBorderObjects.map(
+    (bo) => `<${bo.position} style="thin">
+  <color  ${buildColorAtt(bo.color)}" />
+</${bo.position}>`
+  );
+
+  return `<border>
+  ${borderXml.join(" ")} 
+</border>`;
+};
 const buildFill = (color) => {
   const colorAtt = buildColorAtt(color);
   return `<fill><patternFill patternType="solid"><fgColor ${colorAtt} />
@@ -124,7 +163,7 @@ const buildFont = (font) => {
   const colorAtt = color
     ? `<color ${buildColorAtt(color)} />`
     : `<color theme="1" />`;
-  return `<font> ${bold ? "</b>" : ""} 
+  return `<font> ${bold ? "<b/>" : ""} 
    ${sizeStr}
    ${colorAtt}
   <name val="Arial" />
