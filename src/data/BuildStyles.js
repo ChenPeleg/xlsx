@@ -39,8 +39,11 @@ export const buildStyleSheets = (allStyles) => {
     background = `fillId="${+background + 2}" applyFill="1"`;
     console.log(font);
     font = !isNaN(font) ? `fontId="${font + 2}" applyFont="1"` : `fontId="0"`;
+    border = border
+      ? `borderId="${border + 1}" applyBorder="1"`
+      : `borderId="0"`;
     return `
-    <xf numFmtId="0" ${font} ${background} borderId="0" xfId="0" />`;
+    <xf numFmtId="0" ${font} ${background} borderId="0" ${""}  xfId="0" />`;
   });
   if (cellXfs.length) {
     styleXml = styleXml.replace(
@@ -138,7 +141,7 @@ const buildBorder = (borderObjects) => {
 
   const borderXml = fullBorderObjects.map(
     (bo) => `<${bo.position} style="thin">
-  <color  ${buildColorAtt(bo.color)}" />
+  <color  ${buildColorAtt(bo.color)}  />
 </${bo.position}>`
   );
 
