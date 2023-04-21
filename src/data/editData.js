@@ -47,10 +47,10 @@ export const editData = async (data, config) => {
   const rows = [{ cells }];
   const worksheet = { rows, name: "worksheet1" };
 
-  // const worksheet2 = { ...worksheet };
-  // worksheet2.name = "second";
+  const worksheet2 = { ...worksheet };
+  worksheet2.name = "second";
 
-  return createFileObjectFromSheets(worksheet);
+  return createFileObjectFromSheets(worksheet, worksheet2);
 };
 /** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
 const createFileObjectFromSheets = (...sheets) => {
