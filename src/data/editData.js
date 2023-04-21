@@ -40,9 +40,9 @@ export const editData = async (data, config) => {
   const cell5 = CellClass(50);
   cell1.style.background = "FFFF00"; // yellow
   cell2.style.background = "FFD700"; // gold
-  // cell3.style.background = "F08080"; //salmon
-  // cell4.style.background = "00FFFF"; // aqua
-  // cell5.style.background = "F5DEB3"; //wheat
+  cell3.style.background = "F08080"; //salmon
+  cell4.style.background = "00FFFF"; // aqua
+  cell5.style.background = "F5DEB3"; //wheat
   const cells = [cell1, cell2, cell3, cell4, cell5];
   const rows = [{ cells }];
   const worksheet = { rows, name: "worksheet1" };
