@@ -124,11 +124,11 @@ const buildBorder = (borderObjects) => {
     /**
      * @type {{
      *   position: "top" | "bottom" | "right" | "left" | "all";
-     *   width?: number;
-     *   color?: string;
+     *   width: "thin" | "medium" | "thick" | "dotted" | "hair" | "double";
+     *   color: string;
      * }}
      */
-    const border = { color: "000000", position: "all", width: 1 };
+    const border = { color: "000000", position: "all", width: "medium" };
     if (typeof bo === "string") {
       border.position = bo;
     } else {
@@ -152,7 +152,7 @@ const buildBorder = (borderObjects) => {
   }
 
   const borderXml = fullBorderObjects.map(
-    (bo) => `<${bo.position} style="medium">
+    (bo) => `<${bo.position} style="${bo.width}">
   <color  ${buildColorAtt(bo.color)}  />
 </${bo.position}>`
   );
