@@ -1,9 +1,6 @@
 import { resolve } from "path";
-import { runZipper } from "../archive/zipper.js";
-import { copyFiles } from "../cmd/copyFiles.js";
-import { deleteFilesFromDir } from "../cmd/deleteFiles.js";
+import { deleteFilesFromDir, runZipper } from "../utils/file-utils.js";
 import { xlsContent } from "../data/xlsxBuilder.js";
-import { xlsxFiles } from "../data/xlsxFiles.js";
 import { buildSheetObject } from "./buildSheetObject.js";
 
 /** @param {{ tempDir: string }} config */
