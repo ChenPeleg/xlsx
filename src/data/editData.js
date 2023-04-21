@@ -33,6 +33,7 @@ const CellClass = (value, options) => {
  * @returns {Promise<Record<string, { url: string[]; content: string }>>}
  */
 export const editData = async (data, config) => {
+<<<<<<< Updated upstream
   const cell1 = CellClass(4234);
   const cell2 = CellClass("I am a text");
   cell1.style.background = "red";
@@ -45,6 +46,23 @@ export const editData = async (data, config) => {
   worksheet2.name = "second";
 
   return createFileObjectFromSheets(worksheet, worksheet2);
+=======
+  const cell1 = CellClass(10);
+  const cell2 = CellClass(20);
+  const cell3 = CellClass(30);
+  const cell4 = CellClass(0);
+  const cell5 = CellClass(50);
+  cell1.style.background = "FFFF00"; // yellow
+  cell2.style.background = "FFD700"; // gold
+  cell3.style.background = "F08080"; //salmon
+  cell4.style.background = "00FFFF"; // aqua
+  cell5.style.background = "F5DEB3"; //wheat
+  const cells = [cell1, cell2, cell3, cell4, cell5];
+  const rows = [{ cells }];
+  const worksheet = { rows, name: "worksheet1" };
+
+  return createFileObjectFromSheets(worksheet);
+>>>>>>> Stashed changes
 };
 /** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
 const createFileObjectFromSheets = (...sheets) => {
