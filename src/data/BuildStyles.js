@@ -10,7 +10,7 @@ export const buildStyleSheets = (allStyles) => {
     border: [],
   };
   const styleIdModel = {};
-  // @ts-ignore
+
   const stylesWithIds = allStyles.map((s) => ({ ...styleIdModel }));
   let styleXml = googleSheetStyles; // xlsxFiles.styles.content;
   allStyles.forEach((s, i) => {
