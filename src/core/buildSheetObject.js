@@ -2,7 +2,7 @@ import { createFileObjectFromSheets } from "../data/createXlsObject.js";
 
 export const buildSheetObject = async () => {
   const cell1 = createCell(10);
-  const cell2 = createCell(20);
+  const cell2 = createCell("20 abc");
   const cell3 = createCell(30);
   const cell4 = createCell(0);
   const cell5 = createCell(50);
