@@ -5,7 +5,7 @@ export const buildStyleSheets = (allStyles) => {
   const allStylesContainers = {
     background: [],
     color: [],
-    fontSize: [],
+    font: [],
     bold: [],
     border: [],
   };
@@ -49,53 +49,12 @@ export const buildStyleSheets = (allStyles) => {
       </xf> ${cellXfs.join("")}`
     );
   }
-  if (true) return styleXml;
-  const numFmts = `<fonts count="1" x14ac:knownFonts="1"><font>
-  <sz val="11"/>
-  <color theme="1"/>
-  <name val="Arial"/>
-  <family val="2"/>
-  <charset val="177"/>
-  <scheme val="minor"/>
-</font></fonts>`;
-  const fonts = `<fonts count="1"><font>
-<sz val="11"/> 
-<color rgb="FFFF0000"/>
-<name val="Arial"/>
-<family val="2"/>
-<charset val="177"/>
-<scheme val="minor"/>
-</font></fonts>`;
-  styleXml = styleXml.replace("<fonts/>", fonts);
-  styleXml = styleXml.replace(
-    "<cellStyleXfs/>",
-    `<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>
-</cellStyleXfs>`
-  );
 
-  styleXml = styleXml.replace(
-    "<borders/>",
-    `<borders count="1">
-  <border>
-      <left/>
-      <right/>
-      <top/>
-      <bottom/>
-      <diagonal/>
-  </border></borders>`
-  );
-  styleXml = styleXml.replace("<numFmts/>", "");
-
-  //   styleXml = styleXml.replace(
-  //     "<cellStyles/>",
-  //     `<cellStyles count="${cellXfs.length + 1}">
-  //     ${cellXfs.map(
-  //       (c, i) =>
-  //         `<cellStyle name="styeName_${i}" xfId="${i}" builtinId="${i + 100}"/>`
-  //     )}
-  //     <cellStyle name="Normal" xfId="0" builtinId="0"/>
-  // </cellStyles>`
-  //   );
+  // const fonts = allStylesContainers.font.map((f) => buildFont(f));
+  // styleXml = styleXml.replace(
+  //   `<fonts count="2">`,
+  //   `<fonts count="${fonts.length}">`
+  // );
 
   return styleXml;
 };
@@ -103,7 +62,7 @@ const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
 <styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
     xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
-    <fonts count="2"><font/>
+    <fonts count="2">
         <font>
             <sz val="10.0" />
             <color rgb="FF000000" />
@@ -115,7 +74,7 @@ const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
             <name val="Arial" />
             <scheme val="minor" />
         </font>
-       
+        <font/> 
     </fonts>
     <fills count="2"><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>
         
@@ -135,15 +94,37 @@ const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
     </cellStyles>
     <dxfs count="0" />
 </styleSheet>`;
-
-const buildFill = (color) => {
+const buildColorAtt = (color) => {
   if (colorMap[color.toLowerCase()]) {
     color = colorMap[color.toLowerCase()];
   }
-  const colorAtt = `rgb="FF${color.replace("#", "")}"`;
-
+  return `rgb="FF${color.replace("#", "")}"`;
+};
+const buildFill = (color) => {
+  const colorAtt = buildColorAtt(color);
   return `<fill><patternFill patternType="solid"><fgColor ${colorAtt} />
   <bgColor ${colorAtt} /></patternFill></fill>`;
+};
+/**
+ * @param {{
+ *   size?: number;
+ *   bold?: boolean;
+ *   color?: string;
+ * }} font
+ * @returns {string}
+ */
+const buildFont = (font) => {
+  let { size, bold, color } = font;
+  const sizeStr = size ? `<sz val="${size}.0" />` : "";
+  const colorAtt = color
+    ? `<color ${buildColorAtt(color)} />`
+    : `<color theme="1" />`;
+  return `<font> ${bold ? "</b>" : ""} 
+  <sz val="10.0" />
+  <color rgb="FF000000" />
+  <name val="Arial" />
+  <scheme val="minor" />
+</font>`;
 };
 const colorMap = {
   black: "#000000",

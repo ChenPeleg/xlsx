@@ -1,25 +1,4 @@
-import { createFileObjectFromSheets } from "../data/editData.js";
-
-/**
- * A basic class to describe a worksheet cell
- *
- * @param {any} value
- * @returns {import("../types/worksheet.types.js").Cell}
- */
-const createCell = (value, options) => {
-  /** @type {"empty" | "string" | "number"} */
-  let dataType = "number";
-  if (isNaN(value)) {
-    dataType = "string";
-  } else if (!value) {
-    dataType = "empty";
-  }
-  return {
-    dataType,
-    value,
-    style: {},
-  };
-};
+import { createFileObjectFromSheets } from "../data/createXlsObject.js";
 
 export const buildSheetObject = async () => {
   const cell1 = createCell(10);
@@ -41,3 +20,23 @@ export const buildSheetObject = async () => {
 
   return createFileObjectFromSheets(worksheet, worksheet2);
 };
+/**
+ * A basic class to describe a worksheet cell
+ *
+ * @param {any} value
+ * @returns {import("../types/worksheet.types.js").Cell}
+ */
+function createCell(value, options) {
+  /** @type {"empty" | "string" | "number"} */
+  let dataType = "number";
+  if (isNaN(value)) {
+    dataType = "string";
+  } else if (!value) {
+    dataType = "empty";
+  }
+  return {
+    dataType,
+    value,
+    style: {},
+  };
+}
