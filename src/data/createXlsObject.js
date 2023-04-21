@@ -17,6 +17,7 @@ export const createFileObjectFromSheets = (...sheets) => {
     ...xlsxFiles,
     workbookXml: { ...xlsxFiles.workbookXml },
     workbookRels: { ...xlsxFiles.workbookRels },
+    styles: { ...xlsxFiles.styles },
   };
   const allStyles = [];
 

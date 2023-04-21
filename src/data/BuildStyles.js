@@ -13,6 +13,13 @@ export const buildStyleSheets = (allStyles) => {
 
   const stylesWithIds = allStyles.map((s) => ({ ...styleIdModel }));
   let styleXml = googleSheetStyles; // xlsxFiles.styles.content;
+
+  styleXml = xlsxFiles.styles.content;
+  console.log(
+    "xlsxFiles.styles.content === googleSheetStyles",
+    xlsxFiles.styles.content === googleSheetStyles
+  );
+
   allStyles.forEach((s, i) => {
     for (const prop in s) {
       const trait = s[prop];
@@ -76,7 +83,7 @@ export const buildStyleSheets = (allStyles) => {
   }
   return styleXml;
 };
-const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+export const googleSheetStyles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
     xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
