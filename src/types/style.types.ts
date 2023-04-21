@@ -2,7 +2,7 @@
 
 export type CellBorder = 'top' | 'bottom' | 'right' | 'left' | 'all' | {
   position: 'top' | 'bottom' | 'right' | 'left' | 'all';
-  width?: number;
+  width?:  "thin" | "medium" | "thick" | "dotted" | "hair" | "double";
   color? : string
 }
 export interface CellStyle {

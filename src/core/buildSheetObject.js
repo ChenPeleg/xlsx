@@ -11,12 +11,12 @@ export const buildSheetObject = async () => {
   cell2.style.font = { color: "yellow", bold: true, size: 30 }; // gold
   cell3.style.background = "F08080"; //salmon
   cell4.style.background = "00FFFF"; // aqua
-  cell4.style.border = ["left", "right", "top"];
+  cell4.style.border = ["right", "top", "left"];
   cell3.style.border = ["left", "bottom"];
   // cell5.style.background = "F5DEB3"; //wheat
   const cells = [cell1, cell2, cell3, cell4, cell5];
-  const rows = [{ cells }];
-  const worksheet = { rows, name: "worksheet1" };
+  const rows = [{ cells, height: 54 }];
+  const worksheet = { rows, name: "worksheet1", columnWidth: [50, , , 30] };
 
   const worksheet2 = { ...worksheet };
   worksheet2.name = "second";

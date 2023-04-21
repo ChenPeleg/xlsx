@@ -37,13 +37,12 @@ export const buildStyleSheets = (allStyles) => {
     // @ts-ignore
     let { background, color, font, bold, border } = stl;
     background = `fillId="${+background + 2}" applyFill="1"`;
-    console.log(font);
     font = !isNaN(font) ? `fontId="${font + 2}" applyFont="1"` : `fontId="0"`;
     border = border
       ? `borderId="${border + 1}" applyBorder="1"`
       : `borderId="0"`;
     return `
-    <xf numFmtId="0" ${font} ${background} borderId="0" ${""}  xfId="0" />`;
+    <xf numFmtId="0" ${font} ${background} ${border}  xfId="0" />`;
   });
   if (cellXfs.length) {
     styleXml = styleXml.replace(
@@ -121,15 +120,15 @@ const buildColorAtt = (color) => {
 };
 /** @param {import("../types/style.types.js").CellBorder[]} borderObjects */
 const buildBorder = (borderObjects) => {
-  const fullBorderObjects = borderObjects.map((bo) => {
+  let fullBorderObjects = borderObjects.map((bo) => {
     /**
      * @type {{
      *   position: "top" | "bottom" | "right" | "left" | "all";
-     *   width?: number;
-     *   color?: string;
+     *   width: "thin" | "medium" | "thick" | "dotted" | "hair" | "double";
+     *   color: string;
      * }}
      */
-    const border = { color: "000000", position: "all", width: 1 };
+    const border = { color: "000000", position: "all", width: "medium" };
     if (typeof bo === "string") {
       border.position = bo;
     } else {
@@ -138,9 +137,22 @@ const buildBorder = (borderObjects) => {
     }
     return border;
   });
+  const allPositionOrder = ["left", "right", "top", "bottom"];
+  const sortByPos = (a, b) =>
+    allPositionOrder.indexOf(a.position) - allPositionOrder.indexOf(b.position);
+  if (fullBorderObjects[0].position === "all") {
+    const border = fullBorderObjects[0];
+    // @ts-ignore
+    fullBorderObjects = allPositionOrder.map((p) => ({
+      ...border,
+      position: p,
+    }));
+  } else {
+    fullBorderObjects.sort(sortByPos);
+  }
 
   const borderXml = fullBorderObjects.map(
-    (bo) => `<${bo.position} style="thin">
+    (bo) => `<${bo.position} style="${bo.width}">
   <color  ${buildColorAtt(bo.color)}  />
 </${bo.position}>`
   );

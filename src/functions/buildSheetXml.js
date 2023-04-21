@@ -21,7 +21,8 @@ const buildCell = (cellIndex, cell) => {
  * @returns {string}
  */
 const buildRow = (rowIndex, row) => {
-  let rowText = `<row r="${rowIndex + 1}" spans="2:12">`;
+  const height = row.height ? `ht="${row.height}.0" customHeight="1"` : "";
+  let rowText = `<row r="${rowIndex + 1}" ${height} spans="2:12">`;
   row.cells.forEach((c, i) => {
     rowText += buildCell(`${columnIndexToLetter(i + 1)}${rowIndex + 1}`, c);
   });
@@ -37,7 +38,18 @@ export const buildSheetXml = (worksheet) => {
   const rows = worksheet.rows;
   const rowsLength = rows.length || 3;
   const maxColumns = Math.max(...rows.map((r) => r.cells.length)) || 3;
-  let sheetText = `<sheetData>`;
+  const columnWidth = worksheet.columnWidth?.length
+    ? `<cols> ${worksheet.columnWidth
+        .map((w, i) =>
+          w
+            ? `<col customWidth="1" min="${i + 1}" max="${
+                i + 1
+              }" width="${w}.00" />`
+            : null
+        )
+        .filter((c) => c)}</cols>`
+    : ``;
+  let sheetText = `${columnWidth}<sheetData>`;
   rows.forEach((r, i) => {
     sheetText += buildRow(i, r);
   });
