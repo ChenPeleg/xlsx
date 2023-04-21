@@ -7,8 +7,9 @@ import { unlink } from "node:fs/promises";
 import { xlsxFiles } from "./xlsxFiles.js";
 import { buildStyleSheets } from "./BuildStyles.js";
 
-/** @param {import("../types/worksheet.types.js").Sheet[]} sheets */
-export const createFileObjectFromSheets = (...sheets) => {
+/** @param {import("../types/worksheet.types.js").Workbook} workbook */
+export const createFileObjectFromSheets = (workbook) => {
+  let { sheets } = workbook;
   sheets = sheets.map((s) => ({
     ...s,
     rows: s.rows.map((r) => ({ ...r, cells: r.cells.map((c) => ({ ...c })) })),
