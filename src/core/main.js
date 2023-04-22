@@ -3,6 +3,7 @@ import { deleteFilesFromDir, runZipper } from "../utils/file-utils.js";
 import { xlsContent } from "../data/xlsxBuilder.js";
 import { buildExampleSheetsData } from "../data/buildSheetObject.js";
 import { createFileObjectFromSheets } from "../data/createXlsObject.js";
+import Excel from "exceljs";
 
 /**
  * @param {import("../types/worksheet.types.js").Workbook} data
@@ -17,4 +18,6 @@ export const runApp = async (data, config) => {
   await xlsContent.copyFilesToTempDir(xlsObject, resolve(tempDir));
   await deleteFilesFromDir(outDir);
   await runZipper(workbookObject.name, outDir);
+  const workbook = new Excel.Workbook();
+  const file = await workbook.xlsx.readFile("out/workbook.xlsx");
 };

@@ -146,7 +146,7 @@ const getTapDataAsync = (testFiles) => {
     stream.on("data", (data) => (allData += data.toString()));
     stream.on("test:fail", (data) => {
       pass = false;
-      console.log("Error:", JSON.stringify(data));
+      // console.log("Error:", JSON.stringify(data));
     });
     stream.on("test:pass", (data) => {
       passData.push(data);
