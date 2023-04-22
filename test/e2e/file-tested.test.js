@@ -10,7 +10,7 @@ describe("an excel file was created 2", () => {
     const fileName = "test-excel-file";
     await runApp(null, { tempDir: "temp", outDir: "out" });
     var workbook = new Excel.Workbook();
-    // const file = await workbook.xlsx.readFile("out/test-excel-file.xlsx");
+    const file = await workbook.xlsx.readFile("out/test-excel-file.xlsx");
     // assert.equal(file, 20, "xlsx file too small");
   });
 });
