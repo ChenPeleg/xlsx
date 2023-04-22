@@ -4,7 +4,7 @@ import { rename } from "node:fs/promises";
 import { exec } from "child_process";
 import fs from "node:fs";
 
-export const deleteFilesFromDir = async (directory = "temp") => {
+export const deleteFilesFromDir = async (directory) => {
   const dir = resolve(directory);
   fs.rmSync(dir, { recursive: true, force: true });
   fs.mkdirSync(dir);
@@ -29,18 +29,18 @@ const renameFile = async (oldPath, newPath) => {
 
 /** @param {string} fileName */
 /** @param {string} outDir */
-export const runZipper = async (fileName = "workbook", outDir = "out") => {
+export const runZipper = async (fileName = "workbook", outDir, tempDir) => {
   if (platform() === "win32") {
     const psCommand = `Compress-Archive -Path * -DestinationPath ${resolve(
       outDir
     )}/${fileName}.zip`;
     const res = await execPromise(psCommand, {
-      cwd: "temp",
+      cwd: tempDir,
       shell: "powershell.exe",
     });
   } else {
     const psCommand = `zip -r ${resolve(outDir)}/${fileName}.zip ${resolve(
-      "temp"
+      tempDir
     )}`;
     const res = await execPromise(psCommand);
     console.log(res);
