@@ -5,8 +5,13 @@
  */
 const buildCell = (cellIndex, cell) => {
   const cellStyle = cell.style?.styleId ? `s="${+cell.style.styleId + 1}"` : "";
-  cell.dataType =
-    cell.dataType || typeof cell.value === "string" ? "string" : "number";
+  if (!cell.dataType) {
+    cell.dataType = "empty";
+    if (cell.value) {
+      cell.dataType = typeof cell.value === "string" ? "string" : "number";
+    }
+  }
+
   if (cell.dataType === "string") {
     return `<c r="${cellIndex}" ${cellStyle} t="inlineStr" >  
     <is><t>${cell.value}</t></is>  
