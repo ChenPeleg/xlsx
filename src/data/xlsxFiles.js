@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const baseSheetStyle = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
     xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
@@ -35,6 +36,8 @@ const baseSheetStyle = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <dxfs count="0" />
 </styleSheet>`;
 
+=======
+>>>>>>> 3edeb2baced1f3741bd2c6d2e01422d24b62fe11
 /* @type {Record<string, { url: string[]; content: string }>} */
 export const xlsxFiles = {
   rels: {
@@ -255,7 +258,21 @@ export const xlsxFiles = {
   },
   styles: {
     url: ["xl", "styles.xml"],
+<<<<<<< HEAD
     content: baseSheetStyle,
+=======
+    content: `<stylesheet xmls="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+    <numFmts />
+    <fonts />
+    <fills />
+    <borders />
+    <cellStyleXfs />
+    <cellXfs />
+    <cellStyles />
+    <dxfs />
+    <tableStyles />
+</stylesheet>`,
+>>>>>>> 3edeb2baced1f3741bd2c6d2e01422d24b62fe11
   },
   workbookXml: {
     url: ["xl", "workbook.xml"],
