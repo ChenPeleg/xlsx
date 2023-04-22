@@ -40,7 +40,19 @@ export class xlsContent {
           }.xml"/>`
       )
       .join("\n");
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     return xlsxFiles.workbookRels.content.replace(
+=======
+    return xlsxFiles.rels.replace(
+>>>>>>> cbf2c35 (build a functions that does the same jon as the write file function)
+=======
+    return xlsxFiles.rels.content.replace(
+>>>>>>> 55cff10 (a)
+=======
+    return xlsxFiles.rels.content.replace(
+>>>>>>> 3edeb2baced1f3741bd2c6d2e01422d24b62fe11
       '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>',
       allSheets
     );
@@ -51,13 +63,22 @@ export class xlsContent {
    */
   static copyFilesToTempDir(fileObject, tempDir) {
     for (const file in fileObject) {
+<<<<<<< HEAD
       const dir = resolve(tempDir, ...fileObject[file].url.slice(0, -1));
+=======
+      const dir = resolve(tempDir, ...xlsxFiles[file].url.slice(0, -1));
+>>>>>>> 3edeb2baced1f3741bd2c6d2e01422d24b62fe11
       if (!existsSync(dir)) {
         mkdirSync(dir, { recursive: true });
       }
       writeFileSync(
+<<<<<<< HEAD
         resolve(tempDir, ...fileObject[file].url),
         fileObject[file].content,
+=======
+        resolve(tempDir, ...xlsxFiles[file].url),
+        xlsxFiles[file].content,
+>>>>>>> 3edeb2baced1f3741bd2c6d2e01422d24b62fe11
         { flag: "w", encoding: "utf8" }
       );
     }
