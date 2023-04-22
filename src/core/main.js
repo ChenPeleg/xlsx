@@ -3,10 +3,6 @@ import { deleteFilesFromDir, runZipper } from "../utils/file-utils.js";
 import { xlsContent } from "../data/xlsxBuilder.js";
 import { buildExampleSheetsData } from "../data/buildSheetObject.js";
 import { createFileObjectFromSheets } from "../data/createXlsObject.js";
-import Excel from "exceljs";
-import * as XLSX from "xlsx/xlsx.mjs";
-import * as fs from "fs";
-import { realpathSync } from "node:fs";
 
 /**
  * @param {import("../types/worksheet.types.js").Workbook} data
