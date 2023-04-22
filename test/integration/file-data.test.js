@@ -1,5 +1,4 @@
-import { describe, it } from "node:test";
-import assert from "node:assert/strict";
+// import { expect, jest, test, it, describe } from "@jest/globals";
 import { readdir, statSync } from "fs";
 import { resolve } from "node:path";
 import { runApp } from "../../src/core/main.js";

@@ -1,8 +1,7 @@
-import { describe, it } from "node:test";
-import assert from "node:assert/strict";
+// import { expect, jest, test, it, describe } from "@jest/globals";
 
 describe("first mock test", () => {
   it("simple test", () => {
-    assert.equal(6, 6);
+    expect(6).toEqual(6);
   });
 });
