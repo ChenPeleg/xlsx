@@ -16,9 +16,7 @@ describe("test xlsx file data", () => {
     workbookData.sheets[0].rows[0].cells[0].value = firstCellValue;
     workbookData.sheets[0].rows[0].cells[0].dataType = "string";
     await runApp(workbookData, { tempDir: "temp", outDir: "out" });
-    // const workbook = await XLSX.readFile(
-    //   resolve("out", "test-excel-file.xlsx")
-    // );
+    const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
     // const worksheet1 = workbook.Sheets["worksheet1"];
     // let value = worksheet1.A1.v;
     // assert.equal(value, firstCellValue, "first cell value is correct");
