@@ -1,14 +1,6 @@
 export const TestUtils = {
   createCell(value, options) {
-    /** @type {"empty" | "string" | "number"} */
-    let dataType = "number";
-    if (isNaN(value)) {
-      dataType = "string";
-    } else if (!value) {
-      dataType = "empty";
-    }
     return {
-      dataType,
       value,
       style: {},
     };
