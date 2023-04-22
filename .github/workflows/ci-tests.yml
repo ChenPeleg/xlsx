@@ -24,3 +24,7 @@ jobs:
         run: npm run lint
       - name: Run test suite
         run: npm test
+      - name: checkfiles
+        run: |
+          cd out
+          ls
