@@ -39,9 +39,9 @@ export const runZipper = async (fileName = "workbook", outDir = "out") => {
       shell: "powershell.exe",
     });
   } else {
-    const psCommand = `zip -r ${resolve(outDir)}/${fileName}.zip ${resolve(
-      "temp"
-    )}`;
+    const psCommand = `cd ${resolve("temp")} && zip -r ${resolve(
+      outDir
+    )}/${fileName}.zip ./*`;
     const res = await execPromise(psCommand);
     console.log(res);
   }
