@@ -10,21 +10,17 @@ XLSX.set_fs(fs);
 
 describe("test xlsx file data", () => {
   it("text cell value is created correctly", async () => {
-    // try {
-    //   const fileName = "test-excel-file";
-    //   const firstCellValue = "first cell value";
-    //   const workbookData = await TestUtils.buildExampleSheetsData(fileName);
-    //   workbookData.sheets[0].rows[0].cells[0].value = firstCellValue;
-    //   workbookData.sheets[0].rows[0].cells[0].dataType = "string";
-    //   await runApp(workbookData, { tempDir: "temp", outDir: "out" });
-    //   const workbook = await XLSX.readFile(
-    //     resolve("out", "test-excel-file.xlsx")
-    //   );
-    //   const worksheet1 = workbook.Sheets["worksheet1"];
-    //   let value = worksheet1.A1.v;
-    //   assert.equal(value, firstCellValue, "first cell value is correct");
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    const fileName = "test-excel-file";
+    const firstCellValue = "first cell value";
+    const workbookData = await TestUtils.buildExampleSheetsData(fileName);
+    workbookData.sheets[0].rows[0].cells[0].value = firstCellValue;
+    workbookData.sheets[0].rows[0].cells[0].dataType = "string";
+    await runApp(workbookData, { tempDir: "temp", outDir: "out" });
+
+    const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
+
+    const worksheet1 = workbook.Sheets["worksheet1"];
+    let value = worksheet1.A1.v;
+    assert(value, firstCellValue);
   });
 });
