@@ -16,7 +16,11 @@ describe("test xlsx file data", () => {
     workbookData.sheets[0].rows[0].cells[0].value = firstCellValue;
     workbookData.sheets[0].rows[0].cells[0].dataType = "string";
     await runApp(workbookData, { tempDir: "temp", outDir: "out" });
-    const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
+    try {
+      const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
+    } catch (err) {
+      throw JSON.stringify(err);
+    }
     // const worksheet1 = workbook.Sheets["worksheet1"];
     // let value = worksheet1.A1.v;
     // assert.equal(value, firstCellValue, "first cell value is correct");
