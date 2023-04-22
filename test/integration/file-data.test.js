@@ -20,7 +20,7 @@ describe("test xlsx file data", () => {
       const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
       throw { cause: "a" };
     } catch (err) {
-      throw { cause: "bad bad" }; //JSON.stringify(err);
+      throw { cause: "bad bad", message: "this is a message" }; //JSON.stringify(err);
     }
     // const worksheet1 = workbook.Sheets["worksheet1"];
     // let value = worksheet1.A1.v;
