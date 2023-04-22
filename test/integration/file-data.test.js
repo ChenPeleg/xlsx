@@ -20,7 +20,7 @@ describe("test xlsx file data", () => {
       const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
       throw { cause: "a" };
     } catch (err) {
-      assert.fail("bad bad bad");
+      assert.fail(Error("bad bad bad"));
       // throw { cause: "bad bad", message: "this is a message" }; //JSON.stringify(err);
     }
     // const worksheet1 = workbook.Sheets["worksheet1"];
