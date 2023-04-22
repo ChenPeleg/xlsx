@@ -18,8 +18,9 @@ describe("test xlsx file data", () => {
     await runApp(workbookData, { tempDir: "temp", outDir: "out" });
     try {
       const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
+      throw { cause: "a" };
     } catch (err) {
-      throw JSON.stringify(err);
+      throw { cause: "bad bad" }; //JSON.stringify(err);
     }
     // const worksheet1 = workbook.Sheets["worksheet1"];
     // let value = worksheet1.A1.v;
