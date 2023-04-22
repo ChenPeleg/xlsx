@@ -17,12 +17,12 @@ const getFolderFiles = (fullPath) => {
 
 describe("an excel file was created", () => {
   it("created an excel file", async () => {
-    await runApp(null, { tempDir: "temp", outDir: "out" });
-    const files = await getFolderFiles(resolve("out"));
+    await runApp(null, { tempDir: "temp/1", outDir: "out/1" });
+    const files = await getFolderFiles(resolve("out/1"));
     expect(files.length).toEqual(1);
     expect(files[0].includes(".xlsx")).toEqual(true);
 
-    const stats = statSync(resolve("out", files[0]));
+    const stats = statSync(resolve("out/1", files[0]));
     expect(stats.size > 4000).toEqual(true);
   });
 });
