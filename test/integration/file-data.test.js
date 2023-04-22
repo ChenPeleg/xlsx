@@ -16,12 +16,11 @@ describe("test xlsx file data", () => {
     workbookData.sheets[0].rows[0].cells[0].value = firstCellValue;
     workbookData.sheets[0].rows[0].cells[0].dataType = "string";
     await runApp(workbookData, { tempDir: "temp", outDir: "out" });
-    try {
-      const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
-    } catch (err) {
-      it.todo(err + " " + err.toString() + " " + JSON.stringify(err));
-    }
-    // const worksheet1 = workbook.Sheets["worksheet1"];
-    // let value = worksheet1.A1.v;
+
+    const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
+
+    const worksheet1 = workbook.Sheets["worksheet1"];
+    let value = worksheet1.A1.v;
+    assert(value, firstCellValue);
   });
 });
