@@ -2,7 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readdir, statSync } from "fs";
 import { resolve } from "node:path";
-import { runApp } from "../../src/core/main.js";
+import { runApp } from "../../src/core/xlsx-main.js";
 /**
  * @param {string} fullPath
  * @returns {string[] | any}
