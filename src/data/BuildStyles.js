@@ -49,7 +49,7 @@ export const buildStyleSheets = (allStyles) => {
   });
   if (cellXfs.length) {
     styleXml = styleXml.replace(
-      `<cellXfs count="1"><xf/>`,
+      `<cellXfs count="2"><xf/>`,
       `<cellXfs count="${
         cellXfs.length + 1
       }"><xf borderId="0" fillId="0" fontId="0" numFmtId="0" xfId="0">

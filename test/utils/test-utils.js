@@ -21,7 +21,9 @@ export const TestUtils = {
     const cell2 = createCell(20);
     const cell3 = createCell("Text");
     const cell4 = (createCell(40).style.background = "#FF0000");
-    const cell5 = (createCell("Text With style").style.font.color = "#FF0000");
+    const cell5 = (createCell("Text With style").style.font = {
+      color: "#FF0000",
+    });
 
     const cells = [cell1, cell2, cell3];
     const rows = [{ cells }];
