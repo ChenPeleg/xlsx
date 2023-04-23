@@ -20,12 +20,14 @@ export const TestUtils = {
     const cell1 = createCell(10);
     const cell2 = createCell(20);
     const cell3 = createCell("Text");
-    const cell4 = (createCell(40).style.background = "#FF0000");
-    const cell5 = (createCell("Text With style").style.font = {
+    const cell4 = createCell(40);
+    const cell5 = createCell("Text With style");
+    cell4.style.background = "#FF0000";
+    cell5.style.font = {
       color: "#FF0000",
-    });
+    };
 
-    const cells = [cell1, cell2, cell3];
+    const cells = [cell1, cell2, cell3, cell4, cell5];
     const rows = [{ cells }];
     const worksheet = { rows, name: "worksheet1" };
 
