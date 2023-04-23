@@ -1,4 +1,3 @@
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { xlsxFiles } from "./xlsxXmlFilesStructure.js";
 import { resolve } from "node:path";
 export const xlsContentBuilder = {
@@ -35,22 +34,5 @@ export const xlsContentBuilder = {
       '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>',
       allSheets
     );
-  },
-  /**
-   * @param {Record<string, { url: string[]; content: string }>} fileObject
-   * @param {any} tempDir
-   */
-  copyFilesToTempDir(fileObject, tempDir) {
-    for (const file in fileObject) {
-      const dir = resolve(tempDir, ...fileObject[file].url.slice(0, -1));
-      if (!existsSync(dir)) {
-        mkdirSync(dir, { recursive: true });
-      }
-      writeFileSync(
-        resolve(tempDir, ...fileObject[file].url),
-        fileObject[file].content,
-        { flag: "w", encoding: "utf8" }
-      );
-    }
   },
 };

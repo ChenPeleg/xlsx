@@ -2,6 +2,7 @@ import { resolve } from "node:path";
 import { platform } from "node:os";
 import { rename } from "node:fs/promises";
 import { exec } from "child_process";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import fs from "node:fs";
 
 export const deleteFilesFromDir = async (directory = "temp") => {
@@ -47,4 +48,21 @@ export const runZipper = async (fileName = "workbook", outDir = "out") => {
   }
 
   await renameFile(`${outDir}/${fileName}.zip`, `${outDir}/${fileName}.xlsx`);
+};
+/**
+ * @param {Record<string, { url: string[]; content: string }>} fileObject
+ * @param {any} tempDir
+ */
+export const copyFilesToTempDir = (fileObject, tempDir) => {
+  for (const file in fileObject) {
+    const dir = resolve(tempDir, ...fileObject[file].url.slice(0, -1));
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true });
+    }
+    writeFileSync(
+      resolve(tempDir, ...fileObject[file].url),
+      fileObject[file].content,
+      { flag: "w", encoding: "utf8" }
+    );
+  }
 };
