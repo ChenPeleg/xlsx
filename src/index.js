@@ -1,8 +1,8 @@
-import { runApp } from "./core/xlsx-main.js";
+import { main } from "./core/xlsx-main.js";
 
-async function main() {
-  await runApp(null, { tempDir: "temp", outDir: "out" });
+async function example() {
+  await main(null, { tempDir: "temp", outDir: "out" });
   console.log("success!");
 }
 
-main();
+example();

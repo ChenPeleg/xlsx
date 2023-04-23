@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { resolve } from "node:path";
-import { runApp } from "../../src/core/xlsx-main.js";
+import { main } from "../../src/core/xlsx-main.js";
 import { TestUtils } from "../utils/test-utils.js";
 import * as XLSX from "xlsx/xlsx.mjs";
 import * as fs from "fs";
@@ -27,7 +27,7 @@ describe("test xlsx file data in multiple sheets", () => {
       secondSheetAddition.toString();
     workbookData.sheets[1].rows[0].cells[1].value =
       +workbookData.sheets[1].rows[0].cells[1].value + secondSheetAddition;
-    await runApp(workbookData, { tempDir: "temp", outDir: "out" });
+    await main(workbookData, { tempDir: "temp", outDir: "out" });
     const workbook = XLSX.readFile(resolve("out", `${fileName}.xlsx`));
     const worksheet2 = workbook.Sheets["worksheet2"];
     let firstValue = worksheet2.A1.v;
