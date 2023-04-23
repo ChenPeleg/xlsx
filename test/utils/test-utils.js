@@ -7,9 +7,9 @@ export const TestUtils = {
   },
   /**
    * @param {string} sheetName
-   * @returns {Promise<import("../../src/types/worksheet.types.js").Workbook>}
+   * @returns {import("../../src/types/worksheet.types.js").Workbook}
    */
-  buildExampleSheetsData: async (sheetName) => {
+  buildExampleSheetsData: (sheetName = "worksheet") => {
     // @ts-ignore
     const createCell = TestUtils.createCell;
     const cell1 = createCell(10);
