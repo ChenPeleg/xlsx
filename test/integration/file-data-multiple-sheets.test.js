@@ -1,6 +1,5 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { readdir, statSync } from "fs";
 import { resolve } from "node:path";
 import { runApp } from "../../src/core/main.js";
 import { TestUtils } from "../utils/test-utils.js";
