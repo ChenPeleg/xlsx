@@ -1,7 +1,7 @@
 import { resolve } from "path";
-import { deleteFilesFromDir, runZipper } from "../utils/file-utils.js";
-import { xlsContentBuilder } from "../data/xlsxContentBuilder.js";
-import { createFileObjectFromSheets } from "../data/createXlsObject.js";
+import { deleteFilesFromDir, runZipper } from "./xlsx-utils.js";
+import { xlsContentBuilder } from "./xlsxContentBuilder.js";
+import { createFileObjectFromSheets } from "./createXlsObject.js";
 import { TestUtils } from "../../test/utils/test-utils.js";
 
 /**
