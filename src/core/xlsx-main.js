@@ -22,4 +22,3 @@ export const main = async (data, config) => {
   await deleteFilesFromDir(outDir);
   await runZipper(workbookObject.name, outDir);
 };
-s;
