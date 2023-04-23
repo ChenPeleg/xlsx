@@ -2,9 +2,9 @@ import { resolve } from "node:path";
 
 import { buildSheetXml } from "../functions/buildSheetXml.js";
 import { writeFileSync } from "node:fs";
-import { xlsContent } from "./xlsxBuilder.js";
+import { xlsContentBuilder } from "./xlsContentBuilder.js";
 import { unlink } from "node:fs/promises";
-import { xlsxFiles } from "./xlsxFiles.js";
+import { xlsxFiles } from "./xlsxXmlFiles.js";
 import { buildStyleSheets } from "./BuildStyles.js";
 
 /** @param {import("../types/worksheet.types.js").Workbook} workbook */
@@ -41,9 +41,10 @@ export const createFileObjectFromSheets = (workbook) => {
   xmlFilesObject.styles.content = styles;
 
   const sheetNames = sheets.map((s) => s.name);
-  xmlFilesObject.workbookXml.content = xlsContent.buildWorkbookXml(sheetNames);
+  xmlFilesObject.workbookXml.content =
+    xlsContentBuilder.buildWorkbookXml(sheetNames);
   xmlFilesObject.workbookRels.content =
-    xlsContent.buildRelationsXml(sheetNames);
+    xlsContentBuilder.buildRelationsXml(sheetNames);
   const genericSheet = {
     ...xmlFilesObject.sheet1,
     url: [...xmlFilesObject.sheet1.url],

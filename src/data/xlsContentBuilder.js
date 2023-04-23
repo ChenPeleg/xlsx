@@ -1,21 +1,13 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { xlsxFiles } from "./xlsxFiles.js";
+import { xlsxFiles } from "./xlsxXmlFiles.js";
 import { resolve } from "node:path";
 
-export class xlsContent {
-  /**
-   * @param {number} sheetIndex
-   * @returns
-   */
-  static sheetFile(sheetIndex) {
-    return ["xl", "worksheets", `sheet${sheetIndex}.xml`];
-  }
-
+export const xlsContentBuilder = {
   /**
    * @param {string[]} sheetNames
    * @returns {string}
    */
-  static buildWorkbookXml(sheetNames = ["sheet_1"]) {
+  buildWorkbookXml(sheetNames = ["sheet_1"]) {
     const allSheets = sheetNames
       .map(
         (name, i) =>
@@ -28,8 +20,8 @@ export class xlsContent {
       '<sheet state="visible" name="sheet_1" sheetId="1" r:id="rId4" />',
       allSheets
     );
-  }
-  static buildRelationsXml(sheetNames = ["sheet_1"]) {
+  },
+  buildRelationsXml(sheetNames = ["sheet_1"]) {
     const allSheets = sheetNames
       .map(
         (name, i) =>
@@ -44,12 +36,12 @@ export class xlsContent {
       '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>',
       allSheets
     );
-  }
+  },
   /**
    * @param {Record<string, { url: string[]; content: string }>} fileObject
    * @param {any} tempDir
    */
-  static copyFilesToTempDir(fileObject, tempDir) {
+  copyFilesToTempDir(fileObject, tempDir) {
     for (const file in fileObject) {
       const dir = resolve(tempDir, ...fileObject[file].url.slice(0, -1));
       if (!existsSync(dir)) {
@@ -61,5 +53,5 @@ export class xlsContent {
         { flag: "w", encoding: "utf8" }
       );
     }
-  }
-}
+  },
+};
