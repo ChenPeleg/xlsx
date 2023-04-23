@@ -9,7 +9,7 @@ import * as fs from "fs";
 XLSX.set_fs(fs);
 
 describe("test xlsx file data without styles", () => {
-  it("text cell values are created correctly", async () => {
+  it("text cell values without styles are created correctly", async () => {
     const fileName = "test-excel-file";
     const firstCellValue = "first cell value";
     const secondCellValue = 123456;
