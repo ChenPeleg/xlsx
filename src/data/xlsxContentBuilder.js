@@ -1,7 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { xlsxFiles } from "./xlsxXmlFiles.js";
+import { xlsxFiles } from "./xlsxXmlFilesStructure.js";
 import { resolve } from "node:path";
-
 export const xlsContentBuilder = {
   /**
    * @param {string[]} sheetNames
