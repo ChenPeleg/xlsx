@@ -1,6 +1,6 @@
-import { xlsxFiles } from "./xlsxXmlFiles.js";
+import { xlsxFiles } from "./xlsxXmlFilesStructure.js";
 
-/** @param {import("../types/style.types.js").CellStyle[]} allStyles */
+/** @param {import("../types/worksheet.types.js").CellStyle[]} allStyles */
 export const buildStyleSheets = (allStyles) => {
   const allStylesContainers = {
     background: [],
@@ -86,7 +86,7 @@ const buildColorAtt = (color) => {
   }
   return `rgb="FF${color.replace("#", "")}"`;
 };
-/** @param {import("../types/style.types.js").CellBorder[]} borderObjects */
+/** @param {import("../types/worksheet.types.js").CellBorder[]} borderObjects */
 const buildBorder = (borderObjects) => {
   let fullBorderObjects = borderObjects.map((bo) => {
     /**
