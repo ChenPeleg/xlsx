@@ -29,7 +29,7 @@ export const buildStyleSheets = (allStyles) => {
   const fills = allStylesContainers.background.map((bg) => buildFill(bg));
   if (fills.length) {
     styleXml = styleXml.replace(
-      `<fills count="2"><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>`,
+      `<fills count="2"><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill>`,
       `<fills count="${
         fills.length + 2
       }" ><fill><patternFill patternType="none" /></fill><fill><patternFill patternType="lightGray" /></fill> 
