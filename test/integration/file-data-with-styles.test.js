@@ -8,13 +8,12 @@ import * as XLSX from "xlsx/xlsx.mjs";
 import * as fs from "fs";
 XLSX.set_fs(fs);
 
-describe("test xlsx file data without styles", () => {
+describe("test xlsx file data with styles", () => {
   it("text cell values are created correctly", async () => {
     const fileName = "test-excel-file";
     const firstCellValue = "first cell value";
     const secondCellValue = 123456;
     const workbookData = TestUtils.buildExampleSheetsData(fileName);
-    workbookData.sheets[0].rows[0].cells.forEach((c) => (c.style = {}));
     workbookData.sheets[0].rows[0].cells[0].value = firstCellValue;
     workbookData.sheets[0].rows[0].cells[0].dataType = "string";
     workbookData.sheets[0].rows[0].cells[1].value = secondCellValue;
