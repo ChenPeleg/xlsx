@@ -5,6 +5,10 @@ export const TestUtils = {
       style: {},
     };
   },
+  /**
+   * @param {string} sheetName
+   * @returns {Promise<import("../../src/types/worksheet.types.js").Workbook>}
+   */
   buildExampleSheetsData: async (sheetName) => {
     // @ts-ignore
     const createCell = TestUtils.createCell;
