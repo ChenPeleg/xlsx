@@ -1,4 +1,4 @@
-import { xlsxFiles } from "./xlsxFiles.js";
+import { xlsxFiles } from "./xlsxXmlFiles.js";
 
 /** @param {import("../types/style.types.js").CellStyle[]} allStyles */
 export const buildStyleSheets = (allStyles) => {

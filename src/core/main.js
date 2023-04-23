@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { deleteFilesFromDir, runZipper } from "../utils/file-utils.js";
-import { xlsContent } from "../data/xlsxBuilder.js";
+import { xlsContentBuilder } from "../data/xlsContentBuilder.js";
 import { createFileObjectFromSheets } from "../data/createXlsObject.js";
 import { TestUtils } from "../../test/utils/test-utils.js";
 
@@ -14,7 +14,7 @@ export const runApp = async (data, config) => {
   await deleteFilesFromDir(resolve(tempDir));
   const workbookObject = data || TestUtils.buildExampleSheetsData();
   const xlsObject = createFileObjectFromSheets(workbookObject);
-  await xlsContent.copyFilesToTempDir(xlsObject, resolve(tempDir));
+  await xlsContentBuilder.copyFilesToTempDir(xlsObject, resolve(tempDir));
   await deleteFilesFromDir(outDir);
   await runZipper(workbookObject.name, outDir);
 };
