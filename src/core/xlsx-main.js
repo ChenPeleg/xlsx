@@ -5,14 +5,14 @@ import {
   runZipper,
 } from "./xlsx-utils.js";
 import { xlsContentBuilder } from "./xlsxContentBuilder.js";
-import { createFileObjectFromSheets } from "./createXlsObject.js";
+import { createFileObjectFromSheets } from "./xlsxCreateWorkbookObject.js";
 import { TestUtils } from "../../test/utils/test-utils.js";
 
 /**
  * @param {import("../types/worksheet.types.js").Workbook} data
  * @param {{ tempDir: string; outDir: string }} config
  */
-export const runApp = async (data, config) => {
+export const main = async (data, config) => {
   const tempDir = config?.tempDir || "temp";
   const outDir = config?.outDir || "out";
   await deleteFilesFromDir(resolve(tempDir));
@@ -22,3 +22,4 @@ export const runApp = async (data, config) => {
   await deleteFilesFromDir(outDir);
   await runZipper(workbookObject.name, outDir);
 };
+s;
